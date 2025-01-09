@@ -1,0 +1,102 @@
+/* 폰트 설정 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css');
+
+html,
+body {
+	height: 100%;
+	font-size: 62.5%;
+	font-family: 'Pretendard Variable', Pretendard, -apple-system,
+		BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+		'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+	background-color: #222;
+  overflow-x: hidden;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+input,
+button {
+	all: unset;
+}
+button {
+  cursor: pointer;
+}
+.hidden {
+	width: 1px;
+	height: 1px;
+	font-size: 0;
+	line-height: 0;
+	position: absolute;
+}
+.flex {
+	display: flex;
+}
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+.skipmenu-list a:focus {
+	width: 100%;
+	height: 20px;
+	background-color: black;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	color: white;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+}
+h2 {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+/* 헤더 시작 */
+header {
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0;
+	z-index: 999;
+	justify-content: center;
+	background: linear-gradient(
+		to bottom,
+		white 0%,
+		white 100px,
+		rgba(255, 255, 255, 0.9) 100px,
+		rgba(255, 255, 255, 0.9) 100%
+	);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+#header-wrap {
+	width: 1416px;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+#logo {
+	width: 180px;
+	height: 40px;
+	background: url(/andaz/images/logo.svg) left / contain no-repeat;
+	text-indent: -9999px;
+}
+#logo a {
+  display: block;
+  height: 100%;
+}
+#mainmenu-list {
+	gap: 40px;
+}
+#mainmenu-list > li > a {
+	font: 500 16px Pretendard;
+}
+.submenu {
+	display: none;
+}
+/* 헤더 끝 */

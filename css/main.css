@@ -1,0 +1,446 @@
+/* 객실 조회 시작 */
+#room-search {
+	position: fixed;
+	bottom: 0;
+	z-index: 999;
+	justify-content: center;
+	width: 100%;
+	height: 80px;
+	background-color: white;
+}
+#room-search-wrap {
+	position: relative;
+	width: 1416px;
+	height: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+#search-hide-show {
+	position: absolute;
+	height: 40px;
+	top: -40px;
+	right: 100px;
+	background-color: white;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 10px 28px;
+	box-sizing: border-box;
+	border-radius: 20px 20px 0 0;
+	align-items: center;
+	gap: 8px;
+}
+#search-hide-show::after {
+	content: '';
+	background: url(/andaz/images/arrow-down.svg) center / contain no-repeat;
+	width: 12px;
+	height: 8px;
+	transition: transform 0.4s ease-out;
+}
+#search-hide-show.hide::after {
+	transform: scaleY(-1);
+}
+/* 객실 조회 끝 */
+
+/* 비주얼 시작 */
+#visual {
+	position: relative;
+	margin-top: 80px;
+	height: calc(100vh - 80px);
+}
+#visual-list {
+	height: 100%;
+}
+.visual-img {
+	flex-basis: calc(100% - 80px);
+	flex-shrink: 0;
+	background: top / cover no-repeat;
+}
+.visual-img:nth-child(1) {
+	background-image: url(/andaz/images/visual-img-00.jpg);
+}
+/* 비주얼 끝 * /
+
+/* 콘텐츠 시작 */
+#contents {
+	width: 100%;
+	align-items: center;
+	padding: 60px 0;
+	gap: 100px;
+	color: white;
+}
+/* 인트로 시작 */
+#intro {
+	width: 1416px;
+	gap: 40px;
+}
+#intro-img {
+	width: 600px;
+	background: url(/andaz/images/intro_img.jpg) center / contain no-repeat;
+	flex-shrink: 0;
+}
+#intro-text-wrap {
+	width: 100%;
+	gap: 40px;
+}
+#intro-subtitle {
+	font-size: 24px;
+	line-height: 1.6em;
+}
+#intro-logo {
+	width: 100%;
+	height: 200px;
+	background: url(/andaz/images/logo-white.svg) right / contain no-repeat;
+}
+#intro-text {
+	font: 200 16px / 1.6em Pretendard;
+	text-align: right;
+}
+/* 인트로 끝 */
+
+/* 특별 주문 시작 */
+#special-offer {
+	width: 1416px;
+	gap: 28px;
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+#offer-list {
+	justify-content: space-between;
+	color: black;
+}
+#offer-list > li {
+	width: 600px;
+	position: relative;
+}
+.offer-img {
+	height: 400px;
+	background: center / cover no-repeat;
+	position: relative;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+.offer-img::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	background: #252525;
+	clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+#winter-package .offer-img {
+	background-image: url(/andaz/images/winter-package.jpg);
+}
+#sweet-package .offer-img {
+	background-image: url(/andaz/images/sweet-package.jpg);
+	left: -40px;
+}
+.offer-box {
+	width: 100%;
+	height: 460px;
+	gap: 40px;
+	position: relative;
+	margin-top: -40px;
+	padding: 40px 60px;
+	box-sizing: border-box;
+	background-color: white;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+#winter-package .offer-box {
+	margin-left: 40px;
+}
+.offer-box > div {
+	gap: 20px;
+}
+.offer-box > div > ul,
+.offer-box > div > ul > li {
+	gap: 20px;
+}
+.offer-box h3 {
+	font-size: 24px;
+}
+.offer-box h4 {
+	font-size: 16px;
+	font-weight: 500;
+}
+.offer-box {
+	p,
+	li,
+	button {
+		font-size: 14px;
+		font-weight: 300;
+	}
+}
+.reservation-date p:first-child,
+.special-code p:first-child {
+	font-weight: 400;
+}
+.reservation-date p:nth-child(2),
+.offer-info-code button {
+	width: 100px;
+}
+.offer-info-code button {
+	background: url(/andaz/images/copy.svg) left / contain no-repeat;
+	text-indent: 20px;
+}
+.offer-box .provide-list {
+	gap: 8px;
+}
+.offer-box > div > ul > li {
+	align-items: center;
+}
+li.line::after {
+	content: '';
+	width: 1px;
+	height: 12px;
+	background-color: #aaa;
+}
+.offer-box .provide-list li {
+	gap: 8px;
+	list-style: disc inside;
+}
+/* 특별 주문 끝 */
+
+/* 룸 시작 */
+#room {
+	width: 100%;
+	justify-content: center;
+	background-color: #fffef9;
+	color: black;
+	margin-top: -50px;
+}
+#room-wrap {
+	width: 1416px;
+	padding: 50px 20px;
+	box-sizing: border-box;
+	gap: 28px;
+}
+#room-visual-wrap {
+	gap: 40px;
+}
+#room-img {
+	width: 70%;
+	position: relative;
+	cursor: pointer;
+}
+#room-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+#room-img::after {
+	content: '';
+	width: 36px;
+	height: 36px;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	background: url(/andaz/images/expand.svg) center / contain no-repeat;
+}
+#room-info-wrap {
+	width: 30%;
+	justify-content: space-between;
+}
+#room-info-wrap > p {
+	font-size: 14px;
+	line-height: 1.6em;
+	font-weight: 300;
+	text-align: right;
+}
+.room-list-wrap {
+	gap: 12px;
+}
+.room-name-wrap {
+	justify-content: space-between;
+	align-items: center;
+}
+.room-name-wrap p:first-child {
+	font-size: 18px;
+	text-indent: 8px;
+}
+.room-name-wrap p:last-child {
+	font-size: 14px;
+}
+.room-img-list {
+	width: 100%;
+	gap: 20px;
+}
+.room-img-list button {
+	border-width: 12px 4px;
+	border-style: solid;
+	border-color: transparent;
+	transition: box-shadow 0.2s ease-out;
+}
+.room-img-list button.active {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+.room-img-list img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+}
+#room-ex {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.7);
+	cursor: pointer;
+}
+#room-ex img {
+	width: 1400px;
+	object-fit: contain;
+	position: relative;
+}
+#room-ex::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(600px, -360px);
+	background: url(/andaz/images/close.svg) center / contain no-repeat;
+	width: 60px;
+	height: 60px;
+}
+
+#room-type-menu {
+	justify-content: space-between;
+	font-size: 20px;
+	line-height: 1.6em;
+	position: relative;
+}
+#room-type-menu::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+#room-type-menu button {
+	opacity: 0.3;
+	border-bottom: 3px solid transparent;
+	transition: opacity 0.3s ease-out, border-color 0.3s ease-out;
+}
+#room-type-menu button.active {
+	opacity: 1;
+	border-color: black;
+}
+/* 룸 끝 */
+
+/* 다이닝 시작 */
+#dining {
+	width: 1416px;
+	margin-top: -50px;
+	padding: 0 20px;
+	box-sizing: border-box;
+	gap: 28px;
+}
+#dining-list {
+	height: 1400px;
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-areas:
+		'dining-00 dining-01 dining-02'
+		'dining-03 dining-03 dining-04'
+		'dining-05 dining-05 dining-05';
+}
+#dining-list > li {
+	background: center / cover no-repeat;
+	width: 100%;
+	height: 100%;
+}
+#dining-list > li:nth-child(1) {
+	grid-area: dining-00;
+	background-image: url(/andaz/images/dining-00.webp);
+}
+#dining-list > li:nth-child(2) {
+	grid-area: dining-01;
+	background-image: url(/andaz/images/dining-01.jpg);
+}
+#dining-list > li:nth-child(3) {
+	grid-area: dining-02;
+	background-image: url(/andaz/images/dining-02.webp);
+}
+#dining-list > li:nth-child(4) {
+	grid-area: dining-03;
+	background-image: url(/andaz/images/dining-03.webp);
+}
+#dining-list > li:nth-child(5) {
+	grid-area: dining-04;
+	background-image: url(/andaz/images/dining-04.webp);
+}
+#dining-list > li:nth-child(6) {
+	grid-area: dining-05;
+	background-image: url(/andaz/images/dining-05.webp);
+}
+.dining-info-wrap {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+	font: 200 14px / 1.6em Pretendard;
+	opacity: 0;
+	transition: opacity 0.3s ease-out;
+}
+.dining-info-wrap h3 {
+	font: 500 20px / 1.6em Pretendard;
+	text-align: center;
+}
+.dining-info-wrap a {
+	color: white;
+}
+.list-name {
+	font-weight: 300;
+}
+.dining-time {
+	gap: 20px;
+}
+.dining-time > li {
+	gap: 20px;
+}
+.dining-link {
+	gap: 40px;
+}
+.link {
+	gap: 8px;
+	align-items: center;
+}
+.link::after {
+	content: '';
+	width: 12px;
+	height: 12px;
+	background: url(/andaz/images/link.svg) center / contain no-repeat;
+}
+.dining-time-list {
+	gap: 60px;
+	align-items: center;
+}
+.dining-time-list > li {
+	gap: 20px;
+	align-items: center;
+}
+.dining-list-title {
+	font-size: 16px;
+	font-weight: 400;
+	align-items: center;
+}
+.last-order {
+	gap: 4px;
+}
+.last-order::after {
+	content: '(Last Order : PM 11:30)';
+	font-size: 14px;
+	font-weight: 200;
+}
+
+/* 다이닝 끝 */
+/* 콘텐츠 끝 */
