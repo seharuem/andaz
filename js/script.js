@@ -149,28 +149,44 @@ function summerHouse() {
 }
 
 function wedding() {
-	const weddingList = document.querySelector('#wedding-list');
-	const nextBtn = document.querySelector('#wedding-wrap .next');
+	const contentsWrap = document.querySelectorAll('.contents-wrap');
 	let isMove = false;
 
-	nextBtn.addEventListener('click', nextImg);
+	contentsWrap.forEach((item) => {
+		const contentsList = item.querySelector('.contents-list');
+		const nextBtn = item.querySelector('.next');
 
-	function nextImg() {
+		nextBtn.addEventListener('click', () => {
+			nextImg(contentsList);
+		});
+	});
+
+	// const weddingList = document.querySelector('#wedding-list');
+	// const nextBtn = document.querySelector('#wedding-wrap .next');
+	// let isMove = false;
+
+	// nextBtn.addEventListener('click', nextImg);
+
+	function nextImg(target) {
 		if (!isMove) {
 			isMove = true;
 
-			gsap.to(weddingList, {
+			gsap.to(target, {
 				x: -1120,
 				duration: 0.4,
 				ease: 'power1.out',
-				onStart: start,
-				onComplete: complete
+				onStart: () => {
+					start(target);
+				},
+				onComplete: () => {
+					complete(target);
+				}
 			});
 		}
 	}
 
-	function start() {
-		gsap.to(weddingList.children[1], {
+	function start(target) {
+		gsap.to(target.children[1], {
 			width: 1100,
 			filter: 'brightness(1)',
 			duration: 0.4,
@@ -178,14 +194,14 @@ function wedding() {
 		});
 	}
 
-	function complete() {
+	function complete(target) {
 		if (isMove) {
 			isMove = false;
 
-			weddingList.append(weddingList.firstElementChild);
-			gsap.set(weddingList, { x: 0 });
-			gsap.set(weddingList.children[1], { width: 400 });
-			gsap.set(weddingList.lastElementChild, {
+			target.append(target.firstElementChild);
+			gsap.set(target, { x: 0 });
+			gsap.set(target.children[1], { width: 400 });
+			gsap.set(target.lastElementChild, {
 				width: 400,
 				filter: 'brightness(0.5)'
 			});
