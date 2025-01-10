@@ -151,25 +151,44 @@ function summerHouse() {
 function wedding() {
 	const weddingList = document.querySelector('#wedding-list');
 	const nextBtn = document.querySelector('#wedding-wrap .next');
+	let isMove = false;
 
 	nextBtn.addEventListener('click', nextImg);
 
 	function nextImg() {
-		gsap.to(weddingList, {
-			x: -1120,
-			onComplete: test,
-			onStart: test2
-		});
+		if (!isMove) {
+			isMove = true;
 
-		function test2() {
-			weddingList.children[1].style.width = '1100px';
+			gsap.to(weddingList, {
+				x: -1120,
+				duration: 0.4,
+				ease: 'power1.out',
+				onStart: start,
+				onComplete: complete
+			});
 		}
-		
-		function test() {
+	}
+
+	function start() {
+		gsap.to(weddingList.children[1], {
+			width: 1100,
+			filter: 'brightness(1)',
+			duration: 0.4,
+			ease: 'power1.out'
+		});
+	}
+
+	function complete() {
+		if (isMove) {
+			isMove = false;
+
 			weddingList.append(weddingList.firstElementChild);
 			gsap.set(weddingList, { x: 0 });
-			weddingList.children[1].style.width = '';
-			weddingList.lastElementChild.style.width = '400px';
+			gsap.set(weddingList.children[1], { width: 400 });
+			gsap.set(weddingList.lastElementChild, {
+				width: 400,
+				filter: 'brightness(0.5)'
+			});
 		}
 	}
 }

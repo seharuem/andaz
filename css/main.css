@@ -536,18 +536,12 @@ li.line::after {
 #wedding-list li {
 	width: 400px;
 	background: center / cover no-repeat;
-	transition: 0.4s ease-out;
 	flex-shrink: 0;
 	filter: brightness(0.5);
-	transition: width 0.5s ease-out;
 }
 #wedding-list li:nth-child(1) {
 	width: 1100px;
 	filter: none;
-}
-#wedding-list li:nth-child(2) {
-}
-#wedding-list li:nth-child(n + 3) {
 }
 #wedding-list img {
 	width: 100%;
