@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	roomTabEvent();
 	diningEvent();
 	summerHouse();
-	wedding();
+	contentsSlide();
 });
 
 function roomSearchShowHide() {
@@ -148,7 +148,7 @@ function summerHouse() {
 	}
 }
 
-function wedding() {
+function contentsSlide() {
 	const contentsWrap = document.querySelectorAll('.contents-wrap');
 	let isMove = false;
 
@@ -161,12 +161,6 @@ function wedding() {
 		});
 	});
 
-	// const weddingList = document.querySelector('#wedding-list');
-	// const nextBtn = document.querySelector('#wedding-wrap .next');
-	// let isMove = false;
-
-	// nextBtn.addEventListener('click', nextImg);
-
 	function nextImg(target) {
 		if (!isMove) {
 			isMove = true;
@@ -175,6 +169,7 @@ function wedding() {
 				x: -1120,
 				duration: 0.4,
 				ease: 'power1.out',
+				force3D: false,
 				onStart: () => {
 					start(target);
 				},
