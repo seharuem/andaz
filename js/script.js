@@ -165,24 +165,27 @@ function contentsSlide() {
 		if (!isMove) {
 			isMove = true;
 
-			gsap.to(target, {
-				x: -1120,
-				duration: 0.4,
-				ease: 'power1.out',
-				force3D: false,
-				onStart: () => {
-					start(target);
-				},
-				onComplete: () => {
-					complete(target);
+			gsap.fromTo(
+				target,
+				{ xPercent: 0 },
+				{
+					xPercent: -81.2,
+					duration: 0.4,
+					ease: 'power1.out',
+					onStart: () => {
+						start(target);
+					},
+					onComplete: () => {
+						complete(target);
+					}
 				}
-			});
+			);
 		}
 	}
 
 	function start(target) {
 		gsap.to(target.children[1], {
-			width: 1100,
+			width: '80%',
 			filter: 'brightness(1)',
 			duration: 0.4,
 			ease: 'power1.out'
@@ -194,10 +197,10 @@ function contentsSlide() {
 			isMove = false;
 
 			target.append(target.firstElementChild);
-			gsap.set(target, { x: 0 });
-			gsap.set(target.children[1], { width: 400 });
+			gsap.set(target, { xPercent: 0 });
+			// gsap.set(target.children[1], { width: '20%' });
 			gsap.set(target.lastElementChild, {
-				width: 400,
+				width: '20%',
 				filter: 'brightness(0.5)'
 			});
 		}

@@ -5,19 +5,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Andaz</title>
 
-		<!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-		<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
-		<!-- <link
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-		/> -->
+		/>
 
 		<link rel="stylesheet" href="/andaz/css/reset.css" />
 		<link rel="stylesheet" href="/andaz/css/common.css" />
 		<link rel="stylesheet" href="/andaz/css/main.css" />
 
-		<!-- <script src="/andaz/js/script.js" defer></script> -->
+		<script src="/andaz/js/script.js" defer></script>
 	</head>
 	<body>
 		<!-- 바로가기 메뉴 시작 -->
@@ -28,7 +28,7 @@
 		</ul>
 		<!-- 바로가기 메뉴 끝 -->
 
-		<!-- 상단 영역 시작 -->
+		<!-- 헤더 시작 -->
 		<header class="flex">
 			<div id="header-wrap" class="flex">
 				<h1 id="logo"><a href="/andaz/index.html">Andaz</a></h1>
@@ -101,15 +101,22 @@
 				</nav>
 			</div>
 		</header>
-		<!-- 상단 영역 끝 -->
+		<!-- 헤더 끝 -->
 
 		<!-- 조회 고정 영역 시작 -->
 		<section id="room-search" class="flex">
 			<div id="room-search-wrap" class="flex">
 				<button id="search-hide-show" class="flex" type="button">숨기기</button>
-				<!-- <ul id="search-list" class="flex">
-					<li id="check-in"></li>
-				</ul> -->
+				<form class="flex">
+					<div class="room-search-form">
+						<label for="check-in">체크인</label>
+						<input type="date" id="check-in" required />
+					</div>
+					<div class="room-search-form">
+						<label for="check-in">체크아웃</label>
+						<input type="date" id="check-out" required />
+					</div>
+				</form>
 			</div>
 		</section>
 		<!-- 조회 고정 영역 끝 -->
@@ -537,8 +544,8 @@
 
 						<p>
 							웨딩 리셉션을 위한 추가 공간이 필요하시다면 비욘드 더 글라스 I까지
-							확장해 하객들에게 놀라움을 선사할 웅장한 로비로 연결되는 481제곱
-							미터의 공간을 더할 수 있습니다.
+							확장해 하객들에게 놀라움을 선사할 웅장한 로비로 연결되는 481㎡의
+							공간을 더할 수 있습니다.
 						</p>
 					</div>
 				</div>
@@ -589,17 +596,103 @@
 
 			<!-- 배너 시작 -->
 			<section id="banner">
-				<div id="banner-wrap" class="flex">
+				<a href="#" id="banner-wrap" class="flex">
 					<div id="banner-img"></div>
 					<div id="banner-text" class="flex-column">
 						<p>회원 추가 할인</p>
-						<p>hyatt.com에서 예약하고 회원 전용 할인 혜택을 누려 보세요.</p>
-						<a href="#" class="link flex">자세히 보기</a>
+						<div class="flex">
+							<p>hyatt.com에서 예약하고 회원 전용 할인 혜택을 누려 보세요.</p>
+							<p class="link flex">자세히 보기</p>
+						</div>
 					</div>
-				</div>
+				</a>
 			</section>
 			<!-- 배너 끝 -->
 		</section>
 		<!-- 콘텐츠 끝 -->
+
+		<!-- 푸터 시작 -->
+		<footer class="flex">
+			<div id="footer-wrap" class="flex-column">
+				<div id="footer-logo"></div>
+				<div id="footer-info-wrap" class="flex">
+					<div id="footer-map" class="flex-column">
+						<div class="flex-column">
+							<p>오시는 길</p>
+							<button id="map-img" type="button"></button>
+						</div>
+						<div class="flex-column">
+							<p>안다즈 서울 강남</p>
+							<ul id="map-info" class="flex-column">
+								<li>강남구 논현로 854, 서울, 06022 대한민국</li>
+								<li>02 - 2193 - 1234</li>
+							</ul>
+						</div>
+					</div>
+					<div id="footer-menu-wrap" class="flex-column">
+						<ul id="footer-menu">
+							<li id="social" class="flex-column">
+								소셜
+								<ul class="flex">
+									<li><a href="#">Instagram</a></li>
+									<li><a href="#">KakaoTalk</a></li>
+									<li><a href="#">TripAdvisor</a></li>
+									<li><a href="#">Facebook</a></li>
+								</ul>
+							</li>
+							<li class="flex-column">
+								예약
+								<ul class="flex-column">
+									<li><a href="#">수정/취소</a></li>
+									<li><a href="#">호텔 청구서 조회</a></li>
+								</ul>
+							</li>
+							<li class="flex-column">
+								고객 서비스
+								<ul class="flex-column">
+									<li><a href="#">FAQ</a></li>
+									<li><a href="#">문의하기</a></li>
+								</ul>
+							</li>
+							<li id="mobile" class="flex-column">
+								하얏트 모바일 앱 다운로드
+								<ul class="flex">
+									<li><a href="#">Apple Store</a></li>
+									<li><a href="#">Google Play Store</a></li>
+								</ul>
+							</li>
+							<li class="flex-column">
+								추가 검색
+								<ul class="flex-column">
+									<li><a href="#">여행사</a></li>
+									<li><a href="#">기업 여행</a></li>
+									<li><a href="#">레지던스</a></li>
+									<li><a href="#">상품권</a></li>
+								</ul>
+							</li>
+							<li class="flex-column">
+								기업 사이트
+								<ul class="flex-column">
+									<li><a href="#">소개</a></li>
+									<li><a href="#">인재 채용</a></li>
+									<li><a href="#">투자자 홍보</a></li>
+									<li><a href="#">하얏트 개발</a></li>
+									<li><a href="#">기업 책임</a></li>
+									<li><a href="#">뉴스룸</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul id="footer-menu2" class="flex">
+							<li><a href="#">개인정보 보호정책</a></li>
+							<li><a href="#">이용 약관</a></li>
+							<li><a href="#">쿠키 센터</a></li>
+							<li><a href="#">보안 및 안전</a></li>
+							<li>© 2024 Hyatt Corporation</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- 푸터 끝 -->
 	</body>
 </html>

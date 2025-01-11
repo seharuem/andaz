@@ -14,6 +14,16 @@
 	height: 100%;
 	padding: 0 20px;
 	box-sizing: border-box;
+	align-items: center;
+}
+#room-search-wrap form {
+	font-size: 16px;
+	gap: 20px;
+	background-color: skyblue;
+}
+.room-search-form {
+	display: flex;
+	align-items: center;
 }
 #search-hide-show {
 	position: absolute;
@@ -49,6 +59,7 @@
 }
 #visual-list {
 	height: 100%;
+	overflow: hidden;
 }
 .visual-img {
 	flex-basis: calc(100% - 80px);
@@ -74,28 +85,41 @@
 	padding: 0 20px;
 	box-sizing: border-box;
 }
+.link {
+	gap: 8px;
+	align-items: center;
+	font: 200 14px Pretendard;
+	color: white;
+	z-index: 7;
+}
+.link::after {
+	content: '';
+	width: 12px;
+	height: 12px;
+	background: url(/andaz/images/link.svg) center / contain no-repeat;
+}
 
 /* 인트로 시작 */
 #contents #intro {
 	gap: 40px;
+	height: 480px;
 }
 #intro-img {
-	width: 600px;
-	background: url(/andaz/images/intro_img.jpg) center / contain no-repeat;
-	flex-shrink: 0;
+	width: 44%;
+	background: url(/andaz/images/intro_img.jpg) center / cover no-repeat;
 }
 #intro-text-wrap {
-	width: 100%;
-	gap: 40px;
+	width: 60%;
+	justify-content: space-between;
 }
 #intro-subtitle {
-	font-size: 24px;
-	line-height: 1.6em;
+	font: 300 24px / 1.6em Pretendard;
 }
 #intro-logo {
 	width: 100%;
 	height: 200px;
-	background: url(/andaz/images/logo-white.svg) right / contain no-repeat;
+	background-color: white;
+	mask: url(/andaz/images/logo.svg) center / contain no-repeat;
 }
 #intro-text {
 	font: 200 16px / 1.6em Pretendard;
@@ -109,7 +133,7 @@
 	color: black;
 }
 #offer-list > li {
-	width: 600px;
+	width: 45%;
 	position: relative;
 }
 .offer-img {
@@ -217,9 +241,11 @@ li.line::after {
 }
 #room-visual-wrap {
 	gap: 40px;
+	height: 460px;
 }
 #room-img {
 	width: 70%;
+	height: 100%;
 	position: relative;
 	cursor: pointer;
 }
@@ -240,6 +266,7 @@ li.line::after {
 }
 #room-info-wrap {
 	width: 30%;
+	min-width: 300px;
 	justify-content: space-between;
 }
 #room-info-wrap > p {
@@ -277,7 +304,7 @@ li.line::after {
 }
 .room-img-list img {
 	width: 100%;
-	height: 120px;
+	height: 100%;
 	object-fit: cover;
 }
 #room-ex {
@@ -293,7 +320,8 @@ li.line::after {
 }
 #room-ex img {
 	width: 1400px;
-	object-fit: contain;
+	height: 80%;
+	object-fit: cover;
 	position: relative;
 }
 #room-ex::after {
@@ -301,10 +329,10 @@ li.line::after {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(600px, -360px);
-	background: url(/andaz/images/close.svg) center / contain no-repeat;
-	width: 60px;
-	height: 60px;
+	transform: translate(-50%, -50%);
+	background: url(/andaz/images/close.svg) right 20px top 20px / 60px no-repeat;
+	width: 1400px;
+	height: 80%;
 }
 
 #room-type-menu {
@@ -406,19 +434,6 @@ li.line::after {
 .dining-link {
 	gap: 40px;
 }
-.link {
-	gap: 8px;
-	align-items: center;
-	font: 200 14px Pretendard;
-	color: white;
-	z-index: 7;
-}
-.link::after {
-	content: '';
-	width: 12px;
-	height: 12px;
-	background: url(/andaz/images/link.svg) center / contain no-repeat;
-}
 .dining-time-list {
 	gap: 60px;
 	align-items: center;
@@ -479,7 +494,7 @@ li.line::after {
 	width: 70%;
 }
 #summer-img-list li.active button {
-	height: 60px;
+	height: 52px;
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
 	font-size: 20px;
@@ -516,7 +531,9 @@ li.line::after {
 	z-index: 7;
 	width: 100%;
 	justify-content: space-between;
+	align-items: center;
 	font: 200 16px / 1.6em Pretendard;
+	word-break: keep-all;
 }
 #house-info-wrap p:last-child {
 	text-align: right;
@@ -530,17 +547,18 @@ li.line::after {
 	gap: 20px;
 }
 .contents-list {
+	position: relative;
 	height: 520px;
-	gap: 20px;
+	gap: 1.5%;
 }
 .contents-list li {
-	width: 400px;
+	width: 20%;
 	background: center / cover no-repeat;
 	flex-shrink: 0;
 	filter: brightness(0.5);
 }
 .contents-list li:nth-child(1) {
-	width: 1100px;
+	width: 80%;
 	filter: none;
 }
 .contents-list img {
@@ -551,17 +569,17 @@ li.line::after {
 .contents-wrap .next {
 	position: absolute;
 	top: 260px;
-	left: 1070px;
+	left: 78%;
 	transform: translateY(-50%);
 	width: 80px;
 	height: 80px;
 	background: url(/andaz/images/next.svg) center / contain no-repeat;
 }
 .contents-text-wrap {
+	width: 80%;
 	gap: 28px;
 }
 .contents-info-wrap {
-	width: 1100px;
 	justify-content: space-between;
 }
 .contents-title-wrap {
@@ -579,6 +597,7 @@ li.line::after {
 }
 .contents-info-wrap ~ p {
 	font: 200 16px / 1.6em Pretendard;
+	word-break: keep-all;
 }
 .contents-link {
 	gap: 28px;
@@ -587,16 +606,16 @@ li.line::after {
 
 /* 배너 시작 */
 #banner {
-	height: 480px;
+	height: 180px;
 }
 #banner-wrap {
 	height: 100%;
 	position: relative;
-	justify-content: center;
 	align-items: center;
 	gap: 100px;
-	padding: 0 60px;
+	padding: 0 100px;
 	box-sizing: border-box;
+	color: white;
 }
 #banner-wrap::after {
 	content: '';
@@ -607,8 +626,8 @@ li.line::after {
 	background-color: rgba(0, 0, 0, 0.7);
 }
 #banner-img {
-	width: 500px;
-	height: 60%;
+	width: 400px;
+	height: 80%;
 	background-color: skyblue;
 	border-radius: 32px;
 }
@@ -622,15 +641,205 @@ li.line::after {
 	background: url(/andaz/images/banner.jpg) center / cover;
 }
 #banner-text {
-	gap: 40px;
+	width: 100%;
+	gap: 28px;
 }
-#banner-text p:first-child {
+#banner-text > p {
 	font-size: 20px;
 }
-#banner-text p:last-of-type {
-	font-size: 16px;
-	font-weight: 200;
+#banner-text div {
+	gap: 40px;
+	justify-content: space-between;
+}
+#banner-text div p:first-child {
+	font: 200 16px / 1.4em Pretendard;
+	word-break: keep-all;
 }
 /* 배너 끝 */
-
 /* 콘텐츠 끝 */
+
+/* 푸터 시작 */
+
+/* 푸터 끝 */
+
+/* 미디어 쿼리 */
+@media screen and (max-width: 1416px) {
+	#contents > section {
+		width: 92%;
+	}
+	#header-wrap {
+		height: 120px;
+		flex-direction: column;
+	}
+	#mainmenu-list > li > a {
+		line-height: 60px;
+	}
+	#visual {
+		height: calc(100vh - 120px);
+		margin-top: 120px;
+	}
+	#contents #intro {
+		height: 400px;
+	}
+	.offer-box {
+		padding: 40px;
+	}
+	.offer-box h3 {
+		font-size: 22px;
+	}
+	#room-ex img {
+		width: 90%;
+	}
+	#room-ex::after {
+		width: 90%;
+	}
+	#dining-list {
+		height: 1000px;
+		grid-template-rows: 1fr 1fr 1.2fr;
+	}
+}
+@media screen and (max-width: 1200px) {
+	#offer-list {
+		flex-direction: column;
+		gap: 40px;
+	}
+	#offer-list > li {
+		width: 100%;
+		display: flex;
+	}
+	.offer-img {
+		width: 100%;
+		height: 460px;
+	}
+	.offer-box {
+		flex-basis: 480px;
+		flex-shrink: 0;
+		margin-top: 40px;
+		box-shadow: none;
+	}
+	#offer-list .offer-box {
+		margin-left: -40px;
+	}
+	#sweet-package .offer-img {
+		left: 0;
+	}
+	.offer-img::after {
+		top: 0;
+		left: auto;
+		right: 0;
+	}
+	#room-visual-wrap {
+		height: 400px;
+	}
+	#room-type-menu {
+		font-size: 18px;
+	}
+	.dining-time-list > li:last-child {
+		display: none;
+	}
+	#summer-img-list li {
+		width: 24%;
+	}
+	#house-info-wrap {
+		font-size: 15px;
+		gap: 40px;
+	}
+	#banner-wrap {
+		gap: 60px;
+	}
+	#banner-text div {
+		flex-direction: column;
+		gap: 16px;
+	}
+}
+@media screen and (max-width: 1140px) {
+	#header-wrap {
+		height: 80px;
+	}
+	#visual {
+		height: calc(100vh - 80px);
+		margin-top: 80px;
+	}
+	#main-menu {
+		display: none;
+	}
+}
+@media screen and (max-width: 980px) {
+	#contents #intro {
+		height: 360px;
+	}
+	#intro-subtitle {
+		font-size: 20px;
+	}
+	#room-type-menu {
+		display: grid;
+		grid-template-columns: repeat(20, 1fr);
+		row-gap: 8px;
+		justify-items: center;
+	}
+	#room-type-menu > li:nth-child(-n + 4) {
+		grid-column: span 5;
+	}
+	#room-type-menu > li:nth-child(n + 5) {
+		grid-column: span 4;
+	}
+	#room-type-menu::before {
+		content: '';
+		position: absolute;
+		top: 30px;
+		width: 100%;
+		height: 1px;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+	.contents-text-wrap {
+		width: 100%;
+	}
+	#dining-list {
+		height: 800px;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-areas:
+			'dining-00 dining-01'
+			'dining-02 dining-03'
+			'dining-04 dining-05';
+	}
+	.dining-time,
+	.dining-time-list {
+		display: none;
+	}
+	.dining-info-wrap {
+		gap: 28px;
+	}
+	#summer-img-list li.active button {
+		font-size: 18px;
+	}
+	#house-info-wrap {
+		font-size: 14px;
+	}
+	#banner-wrap {
+		padding: 0 40px;
+		gap: 40px;
+	}
+}
+@media screen and (max-width: 860px) {
+	#intro-subtitle {
+		font-size: 18px;
+	}
+	#room-type-menu {
+		font-size: 16px;
+	}
+	#summer-img-list button {
+		height: 36px;
+		font-size: 14px;
+	}
+	#summer-img-list li.active button {
+		height: 44px;
+		font-size: 16px;
+	}
+	#banner-wrap {
+		padding: 0 28px;
+	}
+	#banner-text div p:first-child {
+		font-size: 14px;
+	}
+}
