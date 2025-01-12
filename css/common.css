@@ -15,11 +15,8 @@ a {
 	text-decoration: none;
 	color: #000;
 }
-input,
 button {
 	all: unset;
-}
-button {
 	cursor: pointer;
 }
 .hidden {
@@ -227,6 +224,16 @@ footer {
 	#footer-wrap {
 		width: 92%;
 	}
+	#room-search #room-search-wrap {
+		width: 92%;
+	}
+	#header-wrap {
+		height: 120px;
+		flex-direction: column;
+	}
+	#mainmenu-list > li > a {
+		line-height: 60px;
+	}
 }
 @media screen and (max-width: 1200px) {
 	#footer-logo {
@@ -243,6 +250,14 @@ footer {
 	#footer-menu {
 		grid-template-columns: auto;
 		grid-auto-flow: column;
+	}
+}
+@media screen and (max-width: 1140px) {
+	#header-wrap {
+		height: 80px;
+	}
+	#main-menu {
+		display: none;
 	}
 }
 @media screen and (max-width: 980px) {

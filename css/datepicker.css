@@ -1,0 +1,66 @@
+.air-datepicker-cell.-year-.-disabled- {
+	pointer-events: none;
+}
+.air-datepicker-cell.-year-.-other-decade-.-disabled- {
+	color: var(--adp-color-disabled);
+}
+.air-datepicker-body--day-name,
+.air-datepicker-nav--title i {
+	color: black;
+}
+.-selected-.air-datepicker-cell.-day-.-other-month-,
+.air-datepicker-cell:nth-child(7n + 1).-disabled-.-other-month-,
+.-in-range-.air-datepicker-cell.-day-.-other-month- {
+	color: var(--adp-color-other-month);
+	opacity: inherit;
+}
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-.-disabled-,
+.air-datepicker-cell:nth-child(7n + 1).-disabled-.-in-range- {
+	opacity: inherit;
+}
+.air-datepicker-body--day-name:first-child,
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-:hover,
+.-in-range-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
+.-selected-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
+.air-datepicker-cell:nth-child(7n + 1).-day- {
+	color: red;
+}
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
+.air-datepicker-cell:nth-child(7n + 1).-day-.-disabled- {
+	opacity: 0.5;
+}
+.air-datepicker-cell.-focus-,
+.air-datepicker-cell.-selected-,
+.air-datepicker-cell.-selected-.-focus-,
+.air-datepicker-cell.-selected-.-current-,
+.-selected-.air-datepicker-cell.-day-.-other-month-,
+.-selected-.-focus-.air-datepicker-cell.-day-.-other-month- {
+	background-color: #ffe206;
+}
+.air-datepicker-cell.-current-.-in-range-,
+.-selected-.air-datepicker-cell.-day-.-other-month-,
+.-in-range-.air-datepicker-cell.-day-.-other-month-,
+.air-datepicker-cell.-current-,
+.air-datepicker-cell.-selected-,
+.air-datepicker-cell.-selected-.-current- {
+	color: inherit;
+}
+.air-datepicker-cell.-in-range-:hover,
+.air-datepicker-cell.-in-range-,
+.-in-range-.air-datepicker-cell.-day-.-other-month- {
+	background-color: #fff9cd;
+}
+.air-datepicker.-active-:not(.-custom-position-),
+.air-datepicker:not(.-custom-position-) {
+	height: 262px;
+	border-radius: 20px;
+	transform: translate(-99px);
+	padding: 8px;
+}
+.air-datepicker--pointer {
+	transform: translate(10px);
+}
+.air-datepicker-cell.-range-from-,
+.air-datepicker-cell.-range-to- {
+	border-color: #ffe206;
+}

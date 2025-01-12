@@ -14,16 +14,75 @@
 	height: 100%;
 	padding: 0 20px;
 	box-sizing: border-box;
-	align-items: center;
 }
 #room-search-wrap form {
 	font-size: 16px;
 	gap: 20px;
-	background-color: skyblue;
 }
 .room-search-form {
 	display: flex;
+	gap: 16px;
 	align-items: center;
+}
+.room-search-form input {
+	border: none;
+	outline: none;
+	font-size: inherit;
+}
+.room-search-form.count input {
+	width: 10px;
+}
+.room-search-form div {
+	pointer-events: none;
+}
+.room-search-form::after {
+	content: '';
+	width: 1.4px;
+	height: 16px;
+	margin-left: 4px;
+	background-color: #ccc;
+}
+.room-search-form:first-child {
+	label,
+	input {
+		cursor: pointer;
+	}
+}
+.room-search-form:first-child::after {
+	margin-left: 0;
+}
+#datepicker {
+	font: inherit;
+	width: 276px;
+}
+.room-search-form label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.room-search-form:first-child label::before {
+	content: '';
+	background: url(/andaz/images/calendar.svg) center / contain no-repeat;
+	width: 24px;
+	height: 24px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+.room-search-form button {
+	background: center / contain no-repeat;
+	width: 12px;
+	height: 12px;
+}
+.room-search-form .minus {
+	background-image: url(/andaz/images/minus.svg);
+}
+.room-search-form .plus {
+	background-image: url(/andaz/images/plus.svg);
 }
 #search-hide-show {
 	position: absolute;
@@ -667,13 +726,6 @@ li.line::after {
 	#contents > section {
 		width: 92%;
 	}
-	#header-wrap {
-		height: 120px;
-		flex-direction: column;
-	}
-	#mainmenu-list > li > a {
-		line-height: 60px;
-	}
 	#visual {
 		height: calc(100vh - 120px);
 		margin-top: 120px;
@@ -753,15 +805,9 @@ li.line::after {
 	}
 }
 @media screen and (max-width: 1140px) {
-	#header-wrap {
-		height: 80px;
-	}
 	#visual {
 		height: calc(100vh - 80px);
 		margin-top: 80px;
-	}
-	#main-menu {
-		display: none;
 	}
 }
 @media screen and (max-width: 980px) {

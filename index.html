@@ -12,12 +12,19 @@
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 		/>
+		<link
+			rel="stylesheet"
+			href="/andaz/node_modules/air-datepicker/air-datepicker.css"
+		/>
+		<script src="/andaz/node_modules/air-datepicker/air-datepicker.js"></script>
 
 		<link rel="stylesheet" href="/andaz/css/reset.css" />
 		<link rel="stylesheet" href="/andaz/css/common.css" />
 		<link rel="stylesheet" href="/andaz/css/main.css" />
+		<link rel="stylesheet" href="/andaz/css/datepicker.css" />
 
 		<script src="/andaz/js/script.js" defer></script>
+		<script type="module" src="/andaz/js/room-serch.js"></script>
 	</head>
 	<body>
 		<!-- 바로가기 메뉴 시작 -->
@@ -109,12 +116,80 @@
 				<button id="search-hide-show" class="flex" type="button">숨기기</button>
 				<form class="flex">
 					<div class="room-search-form">
-						<label for="check-in">체크인</label>
-						<input type="date" id="check-in" required />
+						<label for="datepicker">체크인</label>
+						<input type="text" id="datepicker" readonly />
 					</div>
-					<div class="room-search-form">
-						<label for="check-in">체크아웃</label>
-						<input type="date" id="check-out" required />
+					<div class="room-search-form count">
+						<label for="room-count">객실</label>
+						<button
+							type="button"
+							aria-label="객실 수 감소"
+							class="minus"
+						></button>
+						<div>
+							<input
+								id="room-count"
+								type="number"
+								min="1"
+								max="2"
+								value="1"
+								readonly
+							/>
+							<span>개</span>
+						</div>
+						<button
+							type="button"
+							aria-label="객실 수 증가"
+							class="plus"
+						></button>
+					</div>
+					<div class="room-search-form count">
+						<label for="adults-count">성인</label>
+						<button
+							type="button"
+							aria-label="성인 수 감소"
+							class="minus"
+						></button>
+						<div>
+							<input
+								id="adults-count"
+								type="number"
+								min="1"
+								max="9"
+								value="1"
+								readonly
+							/>
+							<span>명</span>
+						</div>
+						<button
+							type="button"
+							aria-label="성인 수 증가"
+							class="plus"
+						></button>
+					</div>
+					<div class="room-search-form count">
+						<label for="kids-count">어린이</label>
+						<button
+							type="button"
+							aria-label="어린이 수 감소"
+							class="minus"
+						></button>
+						<div>
+							<input
+								id="kids-count"
+								type="number"
+								min="0"
+								max="4"
+								value="0"
+								readonly
+							/>
+							<span>명</span>
+						</div>
+						<button
+							type="button"
+							aria-label="어린이 수 증가"
+							class="plus"
+						></button>
 					</div>
 				</form>
 			</div>
