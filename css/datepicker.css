@@ -1,58 +1,62 @@
-.air-datepicker-cell.-year-.-disabled- {
-	pointer-events: none;
-}
-.air-datepicker-cell.-year-.-other-decade-.-disabled- {
-	color: var(--adp-color-disabled);
-}
+/* 글씨 색상 */
 .air-datepicker-body--day-name,
 .air-datepicker-nav--title i {
 	color: black;
 }
-.-selected-.air-datepicker-cell.-day-.-other-month-,
-.air-datepicker-cell:nth-child(7n + 1).-disabled-.-other-month-,
-.-in-range-.air-datepicker-cell.-day-.-other-month- {
-	color: var(--adp-color-other-month);
-	opacity: inherit;
+.air-datepicker-cell.-day-.-other-month-.-disabled-.-range-from-,
+.air-datepicker-cell.-day-.-other-month-.-disabled-.-in-range-,
+.air-datepicker-cell.-day-.-other-month-.-disabled-.-focus-,
+.air-datepicker-cell.-day-.-other-month-.-disabled- {
+	color: var(--adp-color-other-month) !important;
 }
-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-.-disabled-,
-.air-datepicker-cell:nth-child(7n + 1).-disabled-.-in-range- {
-	opacity: inherit;
+.air-datepicker-cell.-year-.-other-decade-,
+.air-datepicker-cell.-disabled-.-in-range-,
+.air-datepicker-cell.-day-.-other-month- {
+	color: var(--adp-color-disabled);
 }
-.air-datepicker-body--day-name:first-child,
-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-:hover,
-.-in-range-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
-.-selected-.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
+.air-datepicker-body--day-name.-weekend-:first-child,
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-.-range-from-,
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-.-in-range-,
 .air-datepicker-cell:nth-child(7n + 1).-day- {
-	color: red;
+	color: red !important;
 }
 .air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-,
 .air-datepicker-cell:nth-child(7n + 1).-day-.-disabled- {
-	opacity: 0.5;
+	color: #ff000088 !important;
 }
-.air-datepicker-cell.-focus-,
-.air-datepicker-cell.-selected-,
-.air-datepicker-cell.-selected-.-focus-,
-.air-datepicker-cell.-selected-.-current-,
-.-selected-.air-datepicker-cell.-day-.-other-month-,
-.-selected-.-focus-.air-datepicker-cell.-day-.-other-month- {
-	background-color: #ffe206;
+.air-datepicker-cell:nth-child(7n + 1).-day-.-other-month-.-disabled- {
+	color: #ff000044 !important;
 }
-.air-datepicker-cell.-current-.-in-range-,
-.-selected-.air-datepicker-cell.-day-.-other-month-,
+.air-datepicker-cell.-day-.-other-month-.-range-from-,
+.air-datepicker-cell.-day-.-other-month-.-range-to-,
+.air-datepicker-cell.-day-.-weekend-.-other-month-.-range-to-,
 .-in-range-.air-datepicker-cell.-day-.-other-month-,
-.air-datepicker-cell.-current-,
 .air-datepicker-cell.-selected-,
-.air-datepicker-cell.-selected-.-current- {
-	color: inherit;
+.air-datepicker-cell.-current- {
+	color: inherit !important;
 }
-.air-datepicker-cell.-in-range-:hover,
-.air-datepicker-cell.-in-range-,
-.-in-range-.air-datepicker-cell.-day-.-other-month- {
-	background-color: #fff9cd;
+
+/* 배경 색상 */
+.air-datepicker-cell.-range-from-,
+.air-datepicker-cell.-range-to-,
+.air-datepicker-cell.-selected-,
+.air-datepicker-cell.-focus- {
+	background-color: #ffe206 !important;
+}
+.air-datepicker-cell.-in-range- {
+	background-color: #fff9cd !important;
+}
+.air-datepicker-cell.-day-.-other-month-.-disabled-,
+.air-datepicker-cell.-disabled- {
+	background-color: transparent !important;
+}
+
+/* 기타 */
+.air-datepicker-cell.-year-.-disabled- {
+	pointer-events: none;
 }
 .air-datepicker.-active-:not(.-custom-position-),
 .air-datepicker:not(.-custom-position-) {
-	height: 262px;
 	border-radius: 20px;
 	transform: translate(-99px);
 	padding: 8px;
@@ -62,5 +66,14 @@
 }
 .air-datepicker-cell.-range-from-,
 .air-datepicker-cell.-range-to- {
-	border-color: #ffe206;
+	border: none;
+}
+.air-datepicker-body--cells.-months-,
+.air-datepicker-body--cells.-years- {
+	grid-auto-rows: auto;
+	height: 216px;
+}
+.air-datepicker-body--cells.-days- {
+	grid-auto-rows: auto;
+	height: 194px;
 }

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	roomSearchShowHide();
+	choiceDiscount();
 	roomPreview();
 	roomTabEvent();
 	diningEvent();
@@ -35,6 +36,11 @@ function roomSearchShowHide() {
 			});
 		}
 	}
+}
+
+function choiceDiscount() {
+	const choiceBtn = document.querySelector('#choice-btn');
+	const choiceList = document.querySelector('#choice-list');
 }
 
 function roomPreview() {

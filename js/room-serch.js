@@ -62,9 +62,9 @@ function datePicker() {
 					datepicker.$el.value + '\u00A0\u00A0\u00A0\u00A0체크아웃\u00A0\u00A0';
 			}
 		},
+		multipleDatesSeparator: '\u00A0\u00A0\u00A0\u00A0체크아웃\u00A0\u00A0',
 		container: '#room-search',
 		range: true,
-		multipleDatesSeparator: '\u00A0\u00A0\u00A0\u00A0체크아웃\u00A0\u00A0',
 		autoClose: true,
 		minDate: new Date(),
 		maxDate: new Date(2026, 11, 31),
