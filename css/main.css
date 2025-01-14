@@ -92,7 +92,8 @@ input[type='number'] {
 	height: 40px;
 }
 #choice-btn,
-#choice-list {
+#choice-list,
+#discount-code {
 	width: 100%;
 	position: absolute;
 	border: 1px solid rgba(0, 0, 0, 0.3);
@@ -100,14 +101,18 @@ input[type='number'] {
 	line-height: 40px;
 }
 #choice-btn,
-#choice-list button {
+#choice-list button,
+#discount-code {
 	padding: 0 20px;
 	box-sizing: border-box;
 }
 #choice-btn {
+	height: 100%;
 	align-items: center;
 	justify-content: space-between;
 	color: rgba(0, 0, 0, 0.7);
+	background-color: white;
+	z-index: 2;
 }
 #choice-btn::after {
 	content: '';
@@ -121,6 +126,7 @@ input[type='number'] {
 }
 #choice-list {
 	display: none;
+	bottom: 44px;
 	background-color: white;
 	overflow: hidden;
 }
@@ -132,6 +138,24 @@ input[type='number'] {
 }
 #choice-list button {
 	width: 100%;
+}
+#discount-code {
+	height: 100%;
+	font: inherit;
+	outline: 0;
+	z-index: 1;
+}
+#search-btn {
+	font-size: 20px;
+	gap: 12px;
+	align-items: center;
+}
+#search-btn::after {
+	content: '';
+	width: 40px;
+	height: 40px;
+	background: black url(/andaz/images/search.svg) center / 20px no-repeat;
+	border-radius: 50%;
 }
 #search-hide-show {
 	position: absolute;

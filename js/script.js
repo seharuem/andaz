@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	roomSearchShowHide();
 	choiceDiscount();
+	specialCode();
 	roomPreview();
 	roomTabEvent();
 	diningEvent();
@@ -41,6 +42,94 @@ function roomSearchShowHide() {
 function choiceDiscount() {
 	const choiceBtn = document.querySelector('#choice-btn');
 	const choiceList = document.querySelector('#choice-list');
+	const choiceItem = choiceList.querySelectorAll('li');
+	const discountCode = document.querySelector('#discount-code');
+	let isShow = false;
+	let isMove = false;
+
+	choiceBtn.addEventListener('click', moveList);
+	discountCode.addEventListener('click', moveList);
+
+	choiceItem.forEach((list) => {
+		const btn = list.children[0];
+
+		btn.addEventListener('click', inputText);
+
+		function inputText() {
+			const choiceText = btn.innerHTML;
+
+			moveList();
+
+			if (list !== choiceItem[0]) {
+				discountCode.style.zIndex = 3;
+				discountCode.placeholder = choiceText;
+			} else {
+				discountCode.style.zIndex = '';
+				choiceBtn.innerHTML = choiceText;
+			}
+		}
+	});
+
+	function moveList() {
+		if (!isShow && !isMove) {
+			isShow = true;
+			isMove = true;
+
+			gsap.set(choiceList, {
+				y: 400,
+				clipPath: 'inset(0 0 140% 0)',
+				display: 'block'
+			});
+
+			gsap.to(choiceList, {
+				y: 0,
+				clipPath: 'inset(0 0 0% 0)',
+				duration: 0.6,
+				ease: 'power2.out',
+				onComplete: () => {
+					isMove = false;
+				}
+			});
+		} else if (isShow && !isMove) {
+			isMove = true;
+
+			gsap.to(choiceList, {
+				y: 400,
+				clipPath: 'inset(0 0 140% 0)',
+				duration: 0.6,
+				ease: 'power2.out',
+				onComplete: choiceInit
+			});
+		}
+	}
+
+	function choiceInit() {
+		choiceList.style.display = 'none';
+		isShow = false;
+		isMove = false;
+	}
+}
+
+function specialCode() {
+	const codeBtn = document.querySelectorAll('#offer-list button');
+
+	codeBtn.forEach((btn) => {
+		const code = btn.innerText;
+
+		btn.addEventListener('click', () => {
+			codeCopy(code);
+		});
+
+	});
+
+	async function codeCopy(text) {
+		try {
+			await navigator.clipboard.writeText(text);
+			alert('복사 완료!');
+		} catch (err) {
+			alert('복사 실패');
+		}
+	}
 }
 
 function roomPreview() {
