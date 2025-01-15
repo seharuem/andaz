@@ -63,9 +63,11 @@ function choiceDiscount() {
 			if (list !== choiceItem[0]) {
 				discountCode.style.zIndex = 3;
 				discountCode.placeholder = choiceText;
+				discountCode.focus();
+				discountCode.value = '';
 			} else {
 				discountCode.style.zIndex = '';
-				choiceBtn.innerHTML = choiceText;
+				choiceBtn.innerText = choiceText;
 			}
 		}
 	});
@@ -112,22 +114,67 @@ function choiceDiscount() {
 
 function specialCode() {
 	const codeBtn = document.querySelectorAll('#offer-list button');
+	const copyUrl = 'url(/andaz/images/copy.svg)';
+	const checkUrl = 'url(/andaz/images/check.svg)';
+	let toastTimer;
+	let copyImg;
+	let toast;
+	let isActive = false;
 
-	codeBtn.forEach((btn) => {
+	codeBtn.forEach((btn, index) => {
 		const code = btn.innerText;
 
-		btn.addEventListener('click', () => {
-			codeCopy(code);
+		btn.addEventListener('click', async () => {
+			
+			if (isActive) {
+				clearTimeout(toastTimer);
+				codeInit(copyImg);
+			}
+			
+			isActive = true;
+			toastCreate();
+			copyImg = codeBtn[index];
+			
+			await codeCopy(code, btn);
+			
+			toastMotion();
 		});
-
 	});
 
-	async function codeCopy(text) {
+	function codeInit(img) {
+		if (!img) return;
+		img.style.backgroundImage = copyUrl;
+		if (toast) toast.remove();
+		isActive = false;
+	}
+
+	function toastCreate() {
+		toast = document.createElement('div');
+		toast.id = 'toast';
+		document.body.appendChild(toast);
+	}
+
+	function toastMotion() {
+		requestAnimationFrame(() => {
+			toast.style.opacity = 1;
+		});
+
+		toastTimer = setTimeout(() => {
+			toast.style.opacity = 0;
+			setTimeout(() => {
+				codeInit(copyImg);
+			}, 400);
+		}, 1000);
+	}
+
+	async function codeCopy(code, btn) {
 		try {
-			await navigator.clipboard.writeText(text);
-			alert('복사 완료!');
+			await navigator.clipboard.writeText(code);
+			btn.style.backgroundImage = checkUrl;
+			// toastCreate();
+			toast.innerText = '복사되었습니다!';
 		} catch (err) {
-			alert('복사 실패');
+			toast.innerText = '복사 실패하였습니다.';
 		}
 	}
 }
