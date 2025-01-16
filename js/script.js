@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+	visualSlide();
 	roomSearchEvent();
 	choiceDiscount();
 	specialCode();
@@ -8,6 +9,134 @@ document.addEventListener('DOMContentLoaded', () => {
 	summerHouse();
 	contentsSlide();
 });
+
+function visualSlide() {
+	const nextBtn = document.querySelector('#visual > button');
+	const visualList = document.querySelector('#visual-list');
+	const dotList = document.querySelector('#dot-list');
+	const dotBtn = dotList.querySelectorAll('button');
+	let activeDot = dotBtn[0];
+	let activeIndex = 0;
+	let isMove = false;
+	let timer;
+	let imgIndex = 0;
+
+	timer = setInterval(slide, 3000);
+
+	nextBtn.addEventListener('click', slide);
+	dotList.addEventListener('mouseenter', () => {
+		clearInterval(timer);
+	});
+	dotList.addEventListener('mouseleave', () => {
+		timer = setInterval(slide, 3000);
+	});
+
+	dotBtn.forEach((btn, index) => {
+		btn.addEventListener('click', () => {
+			if (btn !== activeDot) {
+				dotActive(btn);
+				dotSlide(index);
+			}
+		});
+	});
+
+	function slide() {
+		const xMove = visualList.children[0].offsetWidth;
+
+		imgIndex++;
+
+		if (imgIndex === 4) imgIndex = 0;
+
+		if (!isMove) {
+			isMove = true;
+			gsap.to(visualList, {
+				x: -xMove,
+				duration: 0.8,
+				onComplete: () => {
+					visualInit();
+					dotActive(dotBtn[imgIndex]);
+				}
+			});
+		}
+	}
+
+	function dotActive(btn) {
+		activeDot.classList.remove('active');
+		activeDot = btn;
+		activeDot.classList.add('active');
+	}
+
+	function dotSlide(index) {
+		const indexGap = index - activeIndex;
+		const xMove = visualList.children[0].offsetWidth * indexGap;
+
+		if (indexGap > 0) {
+			slidePlus();
+		} else if (indexGap < 0) {
+			slideMinus();
+		}
+
+		function slidePlus() {
+			if (!isMove) {
+				isMove = true;
+				gsap.to(visualList, {
+					x: -xMove,
+					duration: 0.8,
+					onComplete: () => {
+						appendImg(indexGap);
+						visualInit2(index);
+					}
+				});
+			}
+		}
+
+		function slideMinus() {
+			prependImg(indexGap);
+
+			if (!isMove) {
+				isMove = true;
+				gsap.from(visualList, {
+					x: xMove,
+					duration: 0.8,
+					onComplete: () => {
+						visualInit2(index);
+					}
+				});
+			}
+		}
+	}
+
+	function visualInit() {
+		const visualImg = visualList.firstElementChild;
+
+		visualList.append(visualImg);
+
+		gsap.set(visualList, { x: 0 });
+
+		isMove = false;
+	}
+
+	function appendImg(gap) {
+		for (let i = 0; i < gap; i++) {
+			const visualImg = visualList.firstElementChild;
+			visualList.append(visualImg);
+		}
+
+		gsap.set(visualList, { x: 0 });
+	}
+
+	function prependImg(gap) {
+		for (let i = 0; i < Math.abs(gap); i++) {
+			const visualImg = visualList.lastElementChild;
+			visualList.prepend(visualImg);
+		}
+	}
+
+	function visualInit2(index) {
+		isMove = false;
+		activeIndex = index;
+	}
+}
 
 function roomSearchEvent() {
 	const roomSearch = document.querySelector('#room-search');

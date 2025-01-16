@@ -72,13 +72,6 @@
 	width: 24px;
 	height: 24px;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-}
-input[type='number'] {
-	-moz-appearance: textfield;
-}
 .room-search-form button {
 	background: center / contain no-repeat;
 	width: 12px;
@@ -198,50 +191,79 @@ input[type='number'] {
 	position: relative;
 	margin-top: 80px;
 	height: calc(100vh - 80px);
+	overflow: hidden;
 }
 #visual-list {
 	height: 100%;
-	overflow: hidden;
 }
-.visual-img {
+#visual-list li {
 	flex-basis: calc(100% - 80px);
 	flex-shrink: 0;
 	background: top / cover no-repeat;
 	filter: brightness(0.5);
+	transition: filter 0.4s ease-out;
 }
-.visual-img.active {
+#visual-list li:first-child {
 	filter: brightness(1);
 }
-.visual-img:nth-child(1) {
+#visual-list #visual-img0 {
 	background-image: url(/andaz/images/visual-img-00.webp);
 }
-.visual-img:nth-child(2) {
+#visual-list #visual-img1 {
 	background-image: url(/andaz/images/visual-img-01.webp);
 }
-.visual-img:nth-child(3) {
+#visual-list #visual-img2 {
 	background-image: url(/andaz/images/visual-img-02.webp);
 }
-.visual-img:nth-child(4) {
+#visual-list #visual-img3 {
 	background-image: url(/andaz/images/visual-img-03.webp);
 }
-#visual button {
+#visual > button {
 	width: 60px;
 	height: 60px;
 	position: absolute;
 	top: 50%;
-	right: 60px;
-	transform: translateY(-50%);
+	right: 80px;
+	transform: translate(50%, -50%);
 	background-color: white;
 	border-radius: 50%;
 }
-#visual button::after {
+#visual > button::after {
 	content: '';
 	position: absolute;
 	top: 0;
 	width: 100%;
 	height: 100%;
 	background-color: black;
-	mask: url(/andaz/images/next.svg) center / contain;
+	mask: url(/andaz/images/next.svg) center / 60% no-repeat;
+}
+#dot-list {
+	position: absolute;
+	top: 20px;
+	right: 100px;
+	gap: 100px;
+}
+#dot-list::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-100%);
+	width: 100%;
+	height: 1px;
+	background-color: white;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+#dot-list button {
+	position: relative;
+	z-index: 3;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+#dot-list button.active {
+	background-color: #ffe206;
 }
 /* 비주얼 끝 * /
 
