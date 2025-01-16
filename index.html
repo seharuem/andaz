@@ -5,6 +5,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Andaz</title>
 
+		<link
+			rel="stylesheet"
+			as="style"
+			crossorigin
+			href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
+		/>
+
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -192,7 +199,9 @@
 						></button>
 					</div>
 					<div id="choice-discount">
-						<button id="choice-btn" class="flex" type="button">특별 요금 선택</button>
+						<button id="choice-btn" class="flex" type="button">
+							특별 요금 선택
+						</button>
 						<ul id="choice-list">
 							<li><button type="button">없음</button></li>
 							<li><button type="button">정부 / 군 관련 업무</button></li>
@@ -202,7 +211,11 @@
 							<li><button type="button">특별 행사 코드</button></li>
 							<li><button type="button">기업 또는 단체 코드</button></li>
 						</ul>
-						<input type="text" placeholder="특별 요금 선택" id="discount-code">
+						<input
+							type="text"
+							placeholder="특별 요금 선택"
+							id="discount-code"
+						/>
 					</div>
 					<button id="search-btn" class="flex" type="submit">객실 조회</button>
 				</form>
@@ -213,11 +226,12 @@
 		<!-- 비주얼 영역 시작 -->
 		<section id="visual">
 			<ul id="visual-list" class="flex">
-				<li class="visual-img"></li>
+				<li class="visual-img active"></li>
 				<li class="visual-img"></li>
 				<li class="visual-img"></li>
 				<li class="visual-img"></li>
 			</ul>
+			<button type="button"></button>
 		</section>
 		<!-- 비주얼 영역 끝 -->
 
@@ -255,7 +269,15 @@
 						<div class="offer-img"></div>
 						<div class="offer-box flex-column">
 							<div class="offer-title-wrap flex-column">
-								<h3>안다즈 윈터 저니 패키지 (베이직 & 얼리버드)</h3>
+								<h3 class="flex">
+									안다즈 윈터 저니 패키지 (베이직 & 얼리버드)
+									<div class="tooltip"></div>
+									<p>
+										얼리버드 패키지는
+										<br />
+										투숙일로부터 7일 전 예약 시 10% 할인 혜택을 제공합니다.
+									</p>
+								</h3>
 								<p>
 									안다즈 윈터 저니 패키지로 환상적인 겨울 여행을 떠나보세요.
 								</p>
@@ -274,7 +296,17 @@
 								</ul>
 							</div>
 							<div class="offer-info-code flex-column">
-								<h4>특별 행사 코드</h4>
+								<h4 class="flex">
+									특별 행사 코드
+									<div class="tooltip"></div>
+									<p>
+										코드를 복사한 후 아래 객실 조회 메뉴의 '특별 요금 선택'을
+										클릭하여
+										<br />
+										<span>특별 행사 코드</span>
+										를 선택한 후 복사한 코드를 붙여넣기하여 조회합니다.
+									</p>
+								</h4>
 								<ul class="special-code flex">
 									<li class="flex line">
 										<p>베이직</p>
@@ -298,7 +330,7 @@
 							</div>
 						</div>
 					</li>
-					<li id="sweet-package">
+					<li id="suite-package">
 						<div class="offer-img"></div>
 						<div class="offer-box flex-column">
 							<div class="offer-title-wrap flex-column">
@@ -310,7 +342,17 @@
 								<p>2025년 1월 1일</p>
 							</div>
 							<div class="offer-info-code flex-column">
-								<h4>기업 또는 단체 코드</h4>
+								<h4 class="flex">
+									기업 또는 단체 코드
+									<div class="tooltip"></div>
+									<p>
+										코드를 복사한 후 아래 객실 조회 메뉴의 '특별 요금 선택'을
+										클릭하여
+										<br />
+										<span>기업 또는 단체 코드</span>
+										를 선택한 후 복사한 코드를 붙여넣기하여 조회합니다.
+									</p>
+								</h4>
 								<button type="button">3905</button>
 							</div>
 							<div class="provide flex-column">
@@ -365,18 +407,13 @@
 							</div>
 							<div class="room-list-wrap flex-column">
 								<div class="room-name-wrap flex">
-									<p>스탠다드 킹 베드</p>
-									<p>33㎡</p>
+									<p>스탠다드 트윈 베드</p>
+									<p>36㎡</p>
 								</div>
 								<ul class="room-img-list flex">
 									<li>
 										<button type="button">
 											<img src="/andaz/images/standard-twin-00.jpg" alt="" />
-										</button>
-									</li>
-									<li>
-										<button type="button">
-											<img src="/andaz/images/standard-king-01.jpg" alt="" />
 										</button>
 									</li>
 								</ul>
@@ -391,8 +428,8 @@
 						<li><button type="button">Suite</button></li>
 						<li><button type="button">Deluxe Suite</button></li>
 						<li><button type="button">Large Suite</button></li>
-						<li><button type="button">Garden Suite</button></li>
 						<li><button type="button">Sky Terrace Suite</button></li>
+						<li><button type="button">Garden Suite</button></li>
 						<li><button type="button">Penthouse</button></li>
 					</ul>
 				</div>
@@ -575,7 +612,7 @@
 						</li>
 					</ul>
 
-					<div id="house-info" class="house-00 flex-column">
+					<div id="house-info" class="flex-column house-0">
 						<div id="house-info-wrap" class="flex">
 							<p>
 								지하 2층에 위치한 편안한 공간에서 7m LED 스크린을 통해 서울의

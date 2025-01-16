@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	roomSearchShowHide();
+	roomSearchEvent();
 	choiceDiscount();
 	specialCode();
 	roomPreview();
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	contentsSlide();
 });
 
-function roomSearchShowHide() {
+function roomSearchEvent() {
 	const roomSearch = document.querySelector('#room-search');
 	const toggleBtn = roomSearch.querySelector('#search-hide-show');
 	let isShow = true;
@@ -19,7 +19,7 @@ function roomSearchShowHide() {
 	function showToggle() {
 		if (isShow) {
 			gsap.to(roomSearch, {
-				y: 80,
+				yPercent: 100,
 				onComplete: () => {
 					isShow = false;
 					toggleBtn.classList.add('hide');
@@ -28,7 +28,7 @@ function roomSearchShowHide() {
 			});
 		} else {
 			gsap.to(roomSearch, {
-				y: 0,
+				yPercent: 0,
 				onComplete: () => {
 					isShow = true;
 					toggleBtn.classList.remove('hide');
@@ -90,6 +90,7 @@ function choiceDiscount() {
 				ease: 'power2.out',
 				onComplete: () => {
 					isMove = false;
+					choiceBtn.classList.add('active');
 				}
 			});
 		} else if (isShow && !isMove) {
@@ -109,6 +110,7 @@ function choiceDiscount() {
 		choiceList.style.display = 'none';
 		isShow = false;
 		isMove = false;
+		choiceBtn.classList.remove('active');
 	}
 }
 
@@ -116,42 +118,44 @@ function specialCode() {
 	const codeBtn = document.querySelectorAll('#offer-list button');
 	const copyUrl = 'url(/andaz/images/copy.svg)';
 	const checkUrl = 'url(/andaz/images/check.svg)';
-	let toastTimer;
-	let copyImg;
 	let toast;
-	let isActive = false;
+	let toastTimer;
+	let fadeTimer;
+	let copyImg;
 
 	codeBtn.forEach((btn, index) => {
 		const code = btn.innerText;
 
 		btn.addEventListener('click', async () => {
-			
-			if (isActive) {
-				clearTimeout(toastTimer);
-				codeInit(copyImg);
-			}
-			
-			isActive = true;
+			codeInit();
 			toastCreate();
 			copyImg = codeBtn[index];
-			
 			await codeCopy(code, btn);
-			
 			toastMotion();
 		});
 	});
 
-	function codeInit(img) {
-		if (!img) return;
-		img.style.backgroundImage = copyUrl;
+	function codeInit() {
 		if (toast) toast.remove();
-		isActive = false;
+		if (toastTimer) clearTimeout(toastTimer);
+		if (fadeTimer) clearTimeout(fadeTimer);
+		if (copyImg) copyImg.style.backgroundImage = copyUrl;
 	}
 
 	function toastCreate() {
 		toast = document.createElement('div');
 		toast.id = 'toast';
 		document.body.appendChild(toast);
+	}
+
+	async function codeCopy(code, btn) {
+		try {
+			await navigator.clipboard.writeText(code);
+			btn.style.backgroundImage = checkUrl;
+			toast.innerText = '복사되었습니다!';
+		} catch (err) {
+			toast.innerText = '복사 실패하였습니다.';
+		}
 	}
 
 	function toastMotion() {
@@ -161,21 +165,15 @@ function specialCode() {
 
 		toastTimer = setTimeout(() => {
 			toast.style.opacity = 0;
-			setTimeout(() => {
-				codeInit(copyImg);
-			}, 400);
+			fadeTimer = setTimeout(toastRemove, 400);
 		}, 1000);
 	}
 
-	async function codeCopy(code, btn) {
-		try {
-			await navigator.clipboard.writeText(code);
-			btn.style.backgroundImage = checkUrl;
-			// toastCreate();
-			toast.innerText = '복사되었습니다!';
-		} catch (err) {
-			toast.innerText = '복사 실패하였습니다.';
-		}
+	function toastRemove() {
+		if (toast) toast.remove();
+		toastTimer = null;
+		fadeTimer = null;
+		if (copyImg) copyImg.style.backgroundImage = copyUrl;
 	}
 }
 
@@ -230,12 +228,14 @@ function roomPreview() {
 }
 
 function roomTabEvent() {
+	const roomInfo = document.querySelector('#room-visual-wrap');
 	const roomTabBtn = document.querySelectorAll('#room-type-menu button');
 	let activeBtn = roomTabBtn[0];
 
-	roomTabBtn.forEach((btn) => {
+	roomTabBtn.forEach((btn, index) => {
 		btn.addEventListener('click', () => {
 			tabChange(btn);
+			roomChange(index);
 		});
 	});
 
@@ -245,6 +245,13 @@ function roomTabEvent() {
 			btn.classList.add('active');
 			activeBtn = btn;
 		}
+	}
+
+	function roomChange(index) {
+		axios.get(`/andaz/room/room${index}.html`).then((res) => {
+			roomInfo.innerHTML = res.data;
+			roomPreview();
+		});
 	}
 }
 
@@ -272,12 +279,16 @@ function diningEvent() {
 }
 
 function summerHouse() {
+	const houseInfo = document.querySelector('#house-info');
 	const summerList = document.querySelectorAll('#summer-img-list button');
 	let activeList = summerList[0];
+	let houseClass = 0;
 
-	summerList.forEach((list) => {
+	summerList.forEach((list, index) => {
 		list.addEventListener('click', () => {
 			listChange(list);
+			textChange(index);
+			classChange(index);
 		});
 	});
 
@@ -286,6 +297,20 @@ function summerHouse() {
 			activeList.parentElement.classList.remove('active');
 			list.parentElement.classList.add('active');
 			activeList = list;
+		}
+	}
+
+	function textChange(index) {
+		axios.get(`/andaz/house/house${index}.html`).then((res) => {
+			houseInfo.innerHTML = res.data;
+		});
+	}
+
+	function classChange(index) {
+		if (index !== houseClass) {
+			houseInfo.classList.remove(`house-${houseClass}`);
+			houseClass = index;
+			houseInfo.classList.add(`house-${houseClass}`);
 		}
 	}
 }

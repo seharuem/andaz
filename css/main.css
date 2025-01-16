@@ -14,12 +14,16 @@
 	width: 1416px;
 	height: 100%;
 	padding: 0 20px;
+	justify-content: center;
 	box-sizing: border-box;
 }
 #room-search-wrap form {
 	font-size: 16px;
 	gap: 20px;
+	flex-wrap: wrap;
 	align-items: center;
+	align-content: center;
+	justify-content: center;
 }
 .room-search-form {
 	display: flex;
@@ -144,6 +148,10 @@ input[type='number'] {
 	font: inherit;
 	outline: 0;
 	z-index: 1;
+	clip-path: inset(0 35px 0 0);
+}
+#discount-code::placeholder {
+	opacity: 0.7;
 }
 #search-btn {
 	font-size: 20px;
@@ -199,9 +207,41 @@ input[type='number'] {
 	flex-basis: calc(100% - 80px);
 	flex-shrink: 0;
 	background: top / cover no-repeat;
+	filter: brightness(0.5);
+}
+.visual-img.active {
+	filter: brightness(1);
 }
 .visual-img:nth-child(1) {
-	background-image: url(/andaz/images/visual-img-00.jpg);
+	background-image: url(/andaz/images/visual-img-00.webp);
+}
+.visual-img:nth-child(2) {
+	background-image: url(/andaz/images/visual-img-01.webp);
+}
+.visual-img:nth-child(3) {
+	background-image: url(/andaz/images/visual-img-02.webp);
+}
+.visual-img:nth-child(4) {
+	background-image: url(/andaz/images/visual-img-03.webp);
+}
+#visual button {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 50%;
+	right: 60px;
+	transform: translateY(-50%);
+	background-color: white;
+	border-radius: 50%;
+}
+#visual button::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	mask: url(/andaz/images/next.svg) center / contain;
 }
 /* 비주얼 끝 * /
 
@@ -289,8 +329,8 @@ input[type='number'] {
 #winter-package .offer-img {
 	background-image: url(/andaz/images/winter-package.jpg);
 }
-#sweet-package .offer-img {
-	background-image: url(/andaz/images/sweet-package.jpg);
+#suite-package .offer-img {
+	background-image: url(/andaz/images/suite-package.jpg);
 	left: -40px;
 }
 .offer-box {
@@ -354,8 +394,48 @@ li.line::after {
 	background-color: #aaa;
 }
 .offer-box .provide-list li {
-	gap: 8px;
-	list-style: disc inside;
+	display: flex;
+	gap: 6px;
+}
+.provide-list li::before {
+	content: '';
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: black;
+}
+.offer-box h3,
+.offer-box h4 {
+	width: max-content;
+	position: relative;
+	gap: 4px;
+}
+.tooltip {
+	width: 12px;
+	height: 12px;
+	background: url(/andaz/images/tooltip.svg);
+}
+.tooltip ~ p {
+	position: absolute;
+	left: calc(100% + 4px);
+	z-index: 7;
+	width: max-content;
+	padding: 16px;
+	border-radius: 8px;
+	background-color: black;
+	color: white;
+	line-height: 1.6em;
+	opacity: 0;
+	transition: opacity 0.4s ease-out;
+	pointer-events: none;
+	word-break: keep-all;
+}
+.tooltip ~ p span {
+	color: #ffe206;
+	margin-right: -4px;
+}
+.tooltip:hover ~ p {
+	opacity: 1;
 }
 #toast {
 	position: fixed;
@@ -415,8 +495,8 @@ li.line::after {
 	background: url(/andaz/images/expand.svg) center / contain no-repeat;
 }
 #room-info-wrap {
-	width: 30%;
-	min-width: 300px;
+	flex-basis: 400px;
+	flex-shrink: 0;
 	justify-content: space-between;
 }
 #room-info-wrap > p {
@@ -440,10 +520,10 @@ li.line::after {
 	font-size: 14px;
 }
 .room-img-list {
-	width: 100%;
 	gap: 20px;
 }
 .room-img-list button {
+	height: 114px;
 	border-width: 12px 4px;
 	border-style: solid;
 	border-color: transparent;
@@ -617,17 +697,21 @@ li.line::after {
 	background: center / cover no-repeat;
 	transition: width 0.5s ease-out;
 }
-#summer-img-list li:nth-child(1) {
-	background-image: url(/andaz/images/summer-house-00.jpg);
+#summer-img-list li:nth-child(1),
+#house-info.house-0 {
+	background-image: url(/andaz/images/summer-house-00.webp);
 }
-#summer-img-list li:nth-child(2) {
-	background-image: url(/andaz/images/summer-house-01.jpg);
+#summer-img-list li:nth-child(2),
+#house-info.house-1 {
+	background-image: url(/andaz/images/summer-house-01.webp);
 }
-#summer-img-list li:nth-child(3) {
+#summer-img-list li:nth-child(3),
+#house-info.house-2 {
 	background-image: url(/andaz/images/summer-house-02.webp);
 }
 #summer-img-list button {
 	position: absolute;
+	z-index: 7;
 	bottom: 0;
 	width: 100%;
 	height: 40px;
@@ -649,6 +733,17 @@ li.line::after {
 	color: white;
 	font-size: 20px;
 }
+#summer-img-list li::after {
+	content: '';
+	background-color: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transition: background-color 0.4s ease-out;
+}
+#summer-img-list li.active::after {
+	background-color: transparent;
+}
 #house-info {
 	width: 100%;
 	gap: 20px;
@@ -657,15 +752,6 @@ li.line::after {
 	align-items: center;
 	position: relative;
 	background: center / cover no-repeat;
-}
-#house-info.house-00 {
-	background-image: url(/andaz/images/summer-house-00.jpg);
-}
-#house-info.house-01 {
-	background-image: url(/andaz/images/summer-house-01.jpg);
-}
-#house-info.house-02 {
-	background-image: url(/andaz/images/summer-house-02.webp);
 }
 #house-info::after {
 	content: '';
@@ -680,6 +766,7 @@ li.line::after {
 	position: relative;
 	z-index: 7;
 	width: 100%;
+	height: 100px;
 	justify-content: space-between;
 	align-items: center;
 	font: 200 16px / 1.6em Pretendard;
@@ -824,11 +911,26 @@ li.line::after {
 	#contents #intro {
 		height: 400px;
 	}
+	#room-search {
+		height: 120px;
+		padding: 8px 0;
+	}
+	#search-hide-show {
+		top: -48px;
+	}
 	.offer-box {
 		padding: 40px;
 	}
 	.offer-box h3 {
 		font-size: 22px;
+	}
+	.tooltip ~ p {
+		top: 100%;
+		left: calc(100% - 12px);
+		width: 320px;
+	}
+	.tooltip ~ p br {
+		display: none;
 	}
 	#room-ex img {
 		width: 90%;
@@ -871,8 +973,11 @@ li.line::after {
 		left: auto;
 		right: 0;
 	}
-	#room-visual-wrap {
-		height: 400px;
+	.offer-title-wrap .tooltip ~ p {
+		left: auto;
+		right: 0;
+		top: auto;
+		bottom: calc(100% + 4px);
 	}
 	#room-type-menu {
 		font-size: 18px;
@@ -912,6 +1017,7 @@ li.line::after {
 		display: grid;
 		grid-template-rows: repeat(2, 1fr);
 		grid-auto-flow: column;
+		row-gap: 12px;
 	}
 	#room-type-menu::before {
 		content: '';
@@ -955,9 +1061,6 @@ li.line::after {
 	#intro-subtitle {
 		font-size: 18px;
 	}
-	#room-type-menu {
-		font-size: 16px;
-	}
 	#summer-img-list button {
 		height: 36px;
 		font-size: 14px;
@@ -971,5 +1074,23 @@ li.line::after {
 	}
 	#banner-text div p:first-child {
 		font-size: 14px;
+	}
+}
+@media screen and (max-width: 810px) {
+	#room-search {
+		height: 160px;
+	}
+	#room-search-wrap {
+		padding: 0 100px;
+	}
+}
+@media screen and (max-width: 790px) {
+	#room-search-wrap {
+		padding: 0 80px;
+	}
+}
+@media screen and (max-width: 768px) {
+	#room-search {
+		display: none;
 	}
 }
