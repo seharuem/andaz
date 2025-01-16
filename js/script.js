@@ -15,48 +15,42 @@ function visualSlide() {
 	const visualList = document.querySelector('#visual-list');
 	const dotList = document.querySelector('#dot-list');
 	const dotBtn = dotList.querySelectorAll('button');
+	const xMove = visualList.children[0].offsetWidth;
 	let activeDot = dotBtn[0];
 	let activeIndex = 0;
 	let isMove = false;
 	let timer;
-	let imgIndex = 0;
 
-	timer = setInterval(slide, 3000);
+	autoSlide();
 
 	nextBtn.addEventListener('click', slide);
 	dotList.addEventListener('mouseenter', () => {
 		clearInterval(timer);
 	});
 	dotList.addEventListener('mouseleave', () => {
-		timer = setInterval(slide, 3000);
+		autoSlide();
 	});
 
 	dotBtn.forEach((btn, index) => {
 		btn.addEventListener('click', () => {
-			if (btn !== activeDot) {
+			if (btn !== activeDot && !isMove) {
 				dotActive(btn);
 				dotSlide(index);
 			}
 		});
 	});
 
+	function autoSlide() {
+		timer = setInterval(slide, 3000);
+	}
+
 	function slide() {
-		const xMove = visualList.children[0].offsetWidth;
-
-		imgIndex++;
-
-		if (imgIndex === 4) imgIndex = 0;
-
 		if (!isMove) {
-			isMove = true;
-			gsap.to(visualList, {
-				x: -xMove,
-				duration: 0.8,
-				onComplete: () => {
-					visualInit();
-					dotActive(dotBtn[imgIndex]);
-				}
-			});
+			activeIndex++;
+			if (activeIndex === dotBtn.length) activeIndex = 0;
+
+			dotActive(dotBtn[activeIndex]);
+			slideNext(1);
 		}
 	}
 
@@ -68,52 +62,47 @@ function visualSlide() {
 
 	function dotSlide(index) {
 		const indexGap = index - activeIndex;
-		const xMove = visualList.children[0].offsetWidth * indexGap;
+		activeIndex = index;
 
 		if (indexGap > 0) {
-			slidePlus();
-		} else if (indexGap < 0) {
-			slideMinus();
-		}
-
-		function slidePlus() {
-			if (!isMove) {
-				isMove = true;
-				gsap.to(visualList, {
-					x: -xMove,
-					duration: 0.8,
-					onComplete: () => {
-						appendImg(indexGap);
-						visualInit2(index);
-					}
-				});
+			if (indexGap === 3) {
+				slidePrev(-1);
+			} else {
+				slideNext(indexGap);
 			}
-		}
-
-		function slideMinus() {
-			prependImg(indexGap);
-
-			if (!isMove) {
-				isMove = true;
-				gsap.from(visualList, {
-					x: xMove,
-					duration: 0.8,
-					onComplete: () => {
-						visualInit2(index);
-					}
-				});
+		} else if (indexGap < 0) {
+			if (indexGap === -3) {
+				slideNext(1);
+			} else {
+				slidePrev(indexGap);
 			}
 		}
 	}
 
-	function visualInit() {
-		const visualImg = visualList.firstElementChild;
+	function slideNext(gap) {
+		isMove = true;
+		gsap.to(visualList, {
+			x: -xMove * Math.abs(gap),
+			duration: 0.8,
+			onComplete: () => {
+				appendImg(gap);
+				isMove = false;
+				gsap.set(visualList, { x: 0 });
+			}
+		});
+	}
 
-		visualList.append(visualImg);
+	function slidePrev(gap) {
+		prependImg(gap);
 
-		gsap.set(visualList, { x: 0 });
-
-		isMove = false;
+		isMove = true;
+		gsap.from(visualList, {
+			x: xMove * gap,
+			duration: 0.8,
+			onComplete: () => {
+				isMove = false;
+			}
+		});
 	}
 
 	function appendImg(gap) {
@@ -121,8 +110,6 @@ function visualSlide() {
 			const visualImg = visualList.firstElementChild;
 			visualList.append(visualImg);
 		}
-
-		gsap.set(visualList, { x: 0 });
 	}
 
 	function prependImg(gap) {
@@ -130,11 +117,6 @@ function visualSlide() {
 			const visualImg = visualList.lastElementChild;
 			visualList.prepend(visualImg);
 		}
-	}
-
-	function visualInit2(index) {
-		isMove = false;
-		activeIndex = index;
 	}
 }
 
@@ -363,23 +345,24 @@ function roomTabEvent() {
 
 	roomTabBtn.forEach((btn, index) => {
 		btn.addEventListener('click', () => {
-			tabChange(btn);
-			roomChange(index);
+			if (btn !== activeBtn) {
+				tabChange(btn);
+				roomChange(index);
+			}
 		});
 	});
 
 	function tabChange(btn) {
-		if (btn !== activeBtn) {
-			activeBtn.classList.remove('active');
-			btn.classList.add('active');
-			activeBtn = btn;
-		}
+		activeBtn.classList.remove('active');
+		btn.classList.add('active');
+		activeBtn = btn;
 	}
 
 	function roomChange(index) {
-		axios.get(`/andaz/room/room${index}.html`).then((res) => {
+		axios.get(`/andaz/ajax/room/room${index}.html`).then((res) => {
 			roomInfo.innerHTML = res.data;
 			roomPreview();
+			gsap.from(roomInfo, { opacity: 0.7 });
 		});
 	}
 }
@@ -430,7 +413,7 @@ function summerHouse() {
 	}
 
 	function textChange(index) {
-		axios.get(`/andaz/house/house${index}.html`).then((res) => {
+		axios.get(`/andaz/ajax/house/house${index}.html`).then((res) => {
 			houseInfo.innerHTML = res.data;
 		});
 	}
@@ -447,15 +430,35 @@ function summerHouse() {
 function contentsSlide() {
 	const contentsWrap = document.querySelectorAll('.contents-wrap');
 	let isMove = false;
+	let contentsIndex = 0;
 
 	contentsWrap.forEach((item) => {
 		const contentsList = item.querySelector('.contents-list');
 		const nextBtn = item.querySelector('.next');
 
 		nextBtn.addEventListener('click', () => {
+			nextText(item);
 			nextImg(contentsList);
 		});
 	});
+
+	function nextText(item) {
+		const itemLength = item.querySelectorAll('li').length;
+		const itemClass = item.classList[0];
+		const itemText = item.querySelector('.contents-text-wrap');
+
+		contentsIndex++;
+
+		if (contentsIndex === itemLength) {
+			contentsIndex = 0;
+		}
+
+		axios
+			.get(`/andaz/ajax/${itemClass}/${itemClass}${contentsIndex}.html`)
+			.then((res) => {
+				itemText.innerHTML = res.data;
+			});
+	}
 
 	function nextImg(target) {
 		if (!isMove) {
@@ -494,7 +497,6 @@ function contentsSlide() {
 
 			target.append(target.firstElementChild);
 			gsap.set(target, { xPercent: 0 });
-			// gsap.set(target.children[1], { width: '20%' });
 			gsap.set(target.lastElementChild, {
 				width: '20%',
 				filter: 'brightness(0.5)'
