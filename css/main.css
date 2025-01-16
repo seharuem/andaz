@@ -858,7 +858,7 @@ li.line::after {
 .contents-info-wrap ~ p {
 	font: 200 16px / 1.6em Pretendard;
 	word-break: keep-all;
-	min-height: 75px;
+	min-height: 77px;
 }
 .contents-link {
 	gap: 28px;

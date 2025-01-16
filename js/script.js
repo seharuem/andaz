@@ -1,506 +1,510 @@
 document.addEventListener('DOMContentLoaded', () => {
-	visualSlide();
-	roomSearchEvent();
-	choiceDiscount();
-	specialCode();
-	roomPreview();
-	roomTabEvent();
-	diningEvent();
-	summerHouse();
-	contentsSlide();
+  visualSlide();
+  roomSearchEvent();
+  choiceDiscount();
+  specialCode();
+  roomPreview();
+  roomTabEvent();
+  diningEvent();
+  summerHouse();
+  contentsSlide();
 });
 
 function visualSlide() {
-	const nextBtn = document.querySelector('#visual > button');
-	const visualList = document.querySelector('#visual-list');
-	const dotList = document.querySelector('#dot-list');
-	const dotBtn = dotList.querySelectorAll('button');
-	const xMove = visualList.children[0].offsetWidth;
-	let activeDot = dotBtn[0];
-	let activeIndex = 0;
-	let isMove = false;
-	let timer;
+  const nextBtn = document.querySelector('#visual > button');
+  const visualList = document.querySelector('#visual-list');
+  const dotList = document.querySelector('#dot-list');
+  const dotBtn = dotList.querySelectorAll('button');
+  let xMove = visualList.children[0].offsetWidth;
+  let activeDot = dotBtn[0];
+  let activeIndex = 0;
+  let isMove = false;
+  let timer;
 
-	autoSlide();
+  autoSlide();
 
-	nextBtn.addEventListener('click', slide);
-	dotList.addEventListener('mouseenter', () => {
-		clearInterval(timer);
-	});
-	dotList.addEventListener('mouseleave', () => {
-		autoSlide();
-	});
+  window.addEventListener('resize', () => {
+		xMove = visualList.children[0].offsetWidth;
+  });
 
-	dotBtn.forEach((btn, index) => {
-		btn.addEventListener('click', () => {
-			if (btn !== activeDot && !isMove) {
-				dotActive(btn);
-				dotSlide(index);
-			}
-		});
-	});
+  nextBtn.addEventListener('click', slide);
+  dotList.addEventListener('mouseenter', () => {
+    clearInterval(timer);
+  });
+  dotList.addEventListener('mouseleave', () => {
+    autoSlide();
+  });
 
-	function autoSlide() {
-		timer = setInterval(slide, 3000);
-	}
+  dotBtn.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      if (btn !== activeDot && !isMove) {
+        dotActive(btn);
+        dotSlide(index);
+      }
+    });
+  });
 
-	function slide() {
-		if (!isMove) {
-			activeIndex++;
-			if (activeIndex === dotBtn.length) activeIndex = 0;
+  function autoSlide() {
+    timer = setInterval(slide, 3000);
+  }
 
-			dotActive(dotBtn[activeIndex]);
-			slideNext(1);
-		}
-	}
+  function slide() {
+    if (!isMove) {
+      activeIndex++;
+      if (activeIndex === dotBtn.length) activeIndex = 0;
 
-	function dotActive(btn) {
-		activeDot.classList.remove('active');
-		activeDot = btn;
-		activeDot.classList.add('active');
-	}
+      dotActive(dotBtn[activeIndex]);
+      slideNext(1);
+    }
+  }
 
-	function dotSlide(index) {
-		const indexGap = index - activeIndex;
-		activeIndex = index;
+  function dotActive(btn) {
+    activeDot.classList.remove('active');
+    activeDot = btn;
+    activeDot.classList.add('active');
+  }
 
-		if (indexGap > 0) {
-			if (indexGap === 3) {
-				slidePrev(-1);
-			} else {
-				slideNext(indexGap);
-			}
-		} else if (indexGap < 0) {
-			if (indexGap === -3) {
-				slideNext(1);
-			} else {
-				slidePrev(indexGap);
-			}
-		}
-	}
+  function dotSlide(index) {
+    const indexGap = index - activeIndex;
+    activeIndex = index;
 
-	function slideNext(gap) {
-		isMove = true;
-		gsap.to(visualList, {
-			x: -xMove * Math.abs(gap),
-			duration: 0.8,
-			onComplete: () => {
-				appendImg(gap);
-				isMove = false;
-				gsap.set(visualList, { x: 0 });
-			}
-		});
-	}
+    if (indexGap > 0) {
+      if (indexGap === 3) {
+        slidePrev(-1);
+      } else {
+        slideNext(indexGap);
+      }
+    } else if (indexGap < 0) {
+      if (indexGap === -3) {
+        slideNext(1);
+      } else {
+        slidePrev(indexGap);
+      }
+    }
+  }
 
-	function slidePrev(gap) {
-		prependImg(gap);
+  function slideNext(gap) {
+    isMove = true;
+    gsap.to(visualList, {
+      x: -xMove * Math.abs(gap),
+      duration: 0.8,
+      onComplete: () => {
+        appendImg(gap);
+        isMove = false;
+        gsap.set(visualList, { x: 0 });
+      }
+    });
+  }
 
-		isMove = true;
-		gsap.from(visualList, {
-			x: xMove * gap,
-			duration: 0.8,
-			onComplete: () => {
-				isMove = false;
-			}
-		});
-	}
+  function slidePrev(gap) {
+    prependImg(gap);
 
-	function appendImg(gap) {
-		for (let i = 0; i < gap; i++) {
-			const visualImg = visualList.firstElementChild;
-			visualList.append(visualImg);
-		}
-	}
+    isMove = true;
+    gsap.from(visualList, {
+      x: xMove * gap,
+      duration: 0.8,
+      onComplete: () => {
+        isMove = false;
+      }
+    });
+  }
 
-	function prependImg(gap) {
-		for (let i = 0; i < Math.abs(gap); i++) {
-			const visualImg = visualList.lastElementChild;
-			visualList.prepend(visualImg);
-		}
-	}
+  function appendImg(gap) {
+    for (let i = 0; i < gap; i++) {
+      const visualImg = visualList.firstElementChild;
+      visualList.append(visualImg);
+    }
+  }
+
+  function prependImg(gap) {
+    for (let i = 0; i < Math.abs(gap); i++) {
+      const visualImg = visualList.lastElementChild;
+      visualList.prepend(visualImg);
+    }
+  }
 }
 
 function roomSearchEvent() {
-	const roomSearch = document.querySelector('#room-search');
-	const toggleBtn = roomSearch.querySelector('#search-hide-show');
-	let isShow = true;
+  const roomSearch = document.querySelector('#room-search');
+  const toggleBtn = roomSearch.querySelector('#search-hide-show');
+  let isShow = true;
 
-	toggleBtn.addEventListener('click', showToggle);
+  toggleBtn.addEventListener('click', showToggle);
 
-	function showToggle() {
-		if (isShow) {
-			gsap.to(roomSearch, {
-				yPercent: 100,
-				onComplete: () => {
-					isShow = false;
-					toggleBtn.classList.add('hide');
-					toggleBtn.innerHTML = '펼치기';
-				}
-			});
-		} else {
-			gsap.to(roomSearch, {
-				yPercent: 0,
-				onComplete: () => {
-					isShow = true;
-					toggleBtn.classList.remove('hide');
-					toggleBtn.innerHTML = '숨기기';
-				}
-			});
-		}
-	}
+  function showToggle() {
+    if (isShow) {
+      gsap.to(roomSearch, {
+        yPercent: 100,
+        onComplete: () => {
+          isShow = false;
+          toggleBtn.classList.add('hide');
+          toggleBtn.innerHTML = '펼치기';
+        }
+      });
+    } else {
+      gsap.to(roomSearch, {
+        yPercent: 0,
+        onComplete: () => {
+          isShow = true;
+          toggleBtn.classList.remove('hide');
+          toggleBtn.innerHTML = '숨기기';
+        }
+      });
+    }
+  }
 }
 
 function choiceDiscount() {
-	const choiceBtn = document.querySelector('#choice-btn');
-	const choiceList = document.querySelector('#choice-list');
-	const choiceItem = choiceList.querySelectorAll('li');
-	const discountCode = document.querySelector('#discount-code');
-	let isShow = false;
-	let isMove = false;
+  const choiceBtn = document.querySelector('#choice-btn');
+  const choiceList = document.querySelector('#choice-list');
+  const choiceItem = choiceList.querySelectorAll('li');
+  const discountCode = document.querySelector('#discount-code');
+  let isShow = false;
+  let isMove = false;
 
-	choiceBtn.addEventListener('click', moveList);
-	discountCode.addEventListener('click', moveList);
+  choiceBtn.addEventListener('click', moveList);
+  discountCode.addEventListener('click', moveList);
 
-	choiceItem.forEach((list) => {
-		const btn = list.children[0];
+  choiceItem.forEach((list) => {
+    const btn = list.children[0];
 
-		btn.addEventListener('click', inputText);
+    btn.addEventListener('click', inputText);
 
-		function inputText() {
-			const choiceText = btn.innerHTML;
+    function inputText() {
+      const choiceText = btn.innerHTML;
 
-			moveList();
+      moveList();
 
-			if (list !== choiceItem[0]) {
-				discountCode.style.zIndex = 3;
-				discountCode.placeholder = choiceText;
-				discountCode.focus();
-				discountCode.value = '';
-			} else {
-				discountCode.style.zIndex = '';
-				choiceBtn.innerText = choiceText;
-			}
-		}
-	});
+      if (list !== choiceItem[0]) {
+        discountCode.style.zIndex = 3;
+        discountCode.placeholder = choiceText;
+        discountCode.focus();
+        discountCode.value = '';
+      } else {
+        discountCode.style.zIndex = '';
+        choiceBtn.innerText = choiceText;
+      }
+    }
+  });
 
-	function moveList() {
-		if (!isShow && !isMove) {
-			isShow = true;
-			isMove = true;
+  function moveList() {
+    if (!isShow && !isMove) {
+      isShow = true;
+      isMove = true;
 
-			gsap.set(choiceList, {
-				y: 400,
-				clipPath: 'inset(0 0 140% 0)',
-				display: 'block'
-			});
+      gsap.set(choiceList, {
+        y: 400,
+        clipPath: 'inset(0 0 140% 0)',
+        display: 'block'
+      });
 
-			gsap.to(choiceList, {
-				y: 0,
-				clipPath: 'inset(0 0 0% 0)',
-				duration: 0.6,
-				ease: 'power2.out',
-				onComplete: () => {
-					isMove = false;
-					choiceBtn.classList.add('active');
-				}
-			});
-		} else if (isShow && !isMove) {
-			isMove = true;
+      gsap.to(choiceList, {
+        y: 0,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.6,
+        ease: 'power2.out',
+        onComplete: () => {
+          isMove = false;
+          choiceBtn.classList.add('active');
+        }
+      });
+    } else if (isShow && !isMove) {
+      isMove = true;
 
-			gsap.to(choiceList, {
-				y: 400,
-				clipPath: 'inset(0 0 140% 0)',
-				duration: 0.6,
-				ease: 'power2.out',
-				onComplete: choiceInit
-			});
-		}
-	}
+      gsap.to(choiceList, {
+        y: 400,
+        clipPath: 'inset(0 0 140% 0)',
+        duration: 0.6,
+        ease: 'power2.out',
+        onComplete: choiceInit
+      });
+    }
+  }
 
-	function choiceInit() {
-		choiceList.style.display = 'none';
-		isShow = false;
-		isMove = false;
-		choiceBtn.classList.remove('active');
-	}
+  function choiceInit() {
+    choiceList.style.display = 'none';
+    isShow = false;
+    isMove = false;
+    choiceBtn.classList.remove('active');
+  }
 }
 
 function specialCode() {
-	const codeBtn = document.querySelectorAll('#offer-list button');
-	const copyUrl = 'url(/andaz/images/copy.svg)';
-	const checkUrl = 'url(/andaz/images/check.svg)';
-	let toast;
-	let toastTimer;
-	let fadeTimer;
-	let copyImg;
+  const codeBtn = document.querySelectorAll('#offer-list button');
+  const copyUrl = 'url(/andaz/images/copy.svg)';
+  const checkUrl = 'url(/andaz/images/check.svg)';
+  let toast;
+  let toastTimer;
+  let fadeTimer;
+  let copyImg;
 
-	codeBtn.forEach((btn, index) => {
-		const code = btn.innerText;
+  codeBtn.forEach((btn, index) => {
+    const code = btn.innerText;
 
-		btn.addEventListener('click', async () => {
-			codeInit();
-			toastCreate();
-			copyImg = codeBtn[index];
-			await codeCopy(code, btn);
-			toastMotion();
-		});
-	});
+    btn.addEventListener('click', async () => {
+      codeInit();
+      toastCreate();
+      copyImg = codeBtn[index];
+      await codeCopy(code, btn);
+      toastMotion();
+    });
+  });
 
-	function codeInit() {
-		if (toast) toast.remove();
-		if (toastTimer) clearTimeout(toastTimer);
-		if (fadeTimer) clearTimeout(fadeTimer);
-		if (copyImg) copyImg.style.backgroundImage = copyUrl;
-	}
+  function codeInit() {
+    if (toast) toast.remove();
+    if (toastTimer) clearTimeout(toastTimer);
+    if (fadeTimer) clearTimeout(fadeTimer);
+    if (copyImg) copyImg.style.backgroundImage = copyUrl;
+  }
 
-	function toastCreate() {
-		toast = document.createElement('div');
-		toast.id = 'toast';
-		document.body.appendChild(toast);
-	}
+  function toastCreate() {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    document.body.appendChild(toast);
+  }
 
-	async function codeCopy(code, btn) {
-		try {
-			await navigator.clipboard.writeText(code);
-			btn.style.backgroundImage = checkUrl;
-			toast.innerText = '복사되었습니다!';
-		} catch (err) {
-			toast.innerText = '복사 실패하였습니다.';
-		}
-	}
+  async function codeCopy(code, btn) {
+    try {
+      await navigator.clipboard.writeText(code);
+      btn.style.backgroundImage = checkUrl;
+      toast.innerText = '복사되었습니다!';
+    } catch (err) {
+      toast.innerText = '복사 실패하였습니다.';
+    }
+  }
 
-	function toastMotion() {
-		requestAnimationFrame(() => {
-			toast.style.opacity = 1;
-		});
+  function toastMotion() {
+    requestAnimationFrame(() => {
+      toast.style.opacity = 1;
+    });
 
-		toastTimer = setTimeout(() => {
-			toast.style.opacity = 0;
-			fadeTimer = setTimeout(toastRemove, 400);
-		}, 1000);
-	}
+    toastTimer = setTimeout(() => {
+      toast.style.opacity = 0;
+      fadeTimer = setTimeout(toastRemove, 400);
+    }, 1000);
+  }
 
-	function toastRemove() {
-		if (toast) toast.remove();
-		toastTimer = null;
-		fadeTimer = null;
-		if (copyImg) copyImg.style.backgroundImage = copyUrl;
-	}
+  function toastRemove() {
+    if (toast) toast.remove();
+    toastTimer = null;
+    fadeTimer = null;
+    if (copyImg) copyImg.style.backgroundImage = copyUrl;
+  }
 }
 
 function roomPreview() {
-	const roomListBtn = document.querySelectorAll('#room-info-wrap button');
-	const roomImgBtn = document.querySelector('#room-img');
-	const roomImg = roomImgBtn.children[0];
-	const roomEx = document.createElement('div');
+  const roomListBtn = document.querySelectorAll('#room-info-wrap button');
+  const roomImgBtn = document.querySelector('#room-img');
+  const roomImg = roomImgBtn.children[0];
+  const roomEx = document.createElement('div');
 
-	let activeBtn = roomListBtn[0];
-	let isActive = false;
+  let activeBtn = roomListBtn[0];
+  let isActive = false;
 
-	roomImgBtn.addEventListener('click', roomExImg);
+  roomImgBtn.addEventListener('click', roomExImg);
 
-	roomEx.addEventListener('click', () => {
-		roomEx.remove();
-	});
+  roomEx.addEventListener('click', () => {
+    roomEx.remove();
+  });
 
-	roomListBtn.forEach((btn) => {
-		btn.addEventListener('click', () => {
-			imgChange(btn);
-		});
-	});
+  roomListBtn.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      imgChange(btn);
+    });
+  });
 
-	function roomExImg() {
-		if (!isActive) {
-			isActive = true;
+  function roomExImg() {
+    if (!isActive) {
+      isActive = true;
 
-			roomEx.id = 'room-ex';
-			roomEx.innerHTML = '<img>';
-			roomEx.children[0].src = roomImg.src;
+      roomEx.id = 'room-ex';
+      roomEx.innerHTML = '<img>';
+      roomEx.children[0].src = roomImg.src;
 
-			document.body.append(roomEx);
+      document.body.append(roomEx);
 
-			gsap.from(roomEx, {
-				opacity: 0.7,
-				onComplete: () => (isActive = false)
-			});
-		}
-	}
+      gsap.from(roomEx, {
+        opacity: 0.7,
+        onComplete: () => (isActive = false)
+      });
+    }
+  }
 
-	function imgChange(btn) {
-		if (btn !== activeBtn) {
-			activeBtn.classList.remove('active');
-			btn.classList.add('active');
-			activeBtn = btn;
+  function imgChange(btn) {
+    if (btn !== activeBtn) {
+      activeBtn.classList.remove('active');
+      btn.classList.add('active');
+      activeBtn = btn;
 
-			roomImg.src = activeBtn.children[0].src;
-			gsap.from(roomImgBtn, { opacity: 0.7 });
-		}
-	}
+      roomImg.src = activeBtn.children[0].src;
+      gsap.from(roomImgBtn, { opacity: 0.7 });
+    }
+  }
 }
 
 function roomTabEvent() {
-	const roomInfo = document.querySelector('#room-visual-wrap');
-	const roomTabBtn = document.querySelectorAll('#room-type-menu button');
-	let activeBtn = roomTabBtn[0];
+  const roomInfo = document.querySelector('#room-visual-wrap');
+  const roomTabBtn = document.querySelectorAll('#room-type-menu button');
+  let activeBtn = roomTabBtn[0];
 
-	roomTabBtn.forEach((btn, index) => {
-		btn.addEventListener('click', () => {
-			if (btn !== activeBtn) {
-				tabChange(btn);
-				roomChange(index);
-			}
-		});
-	});
+  roomTabBtn.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      if (btn !== activeBtn) {
+        tabChange(btn);
+        roomChange(index);
+      }
+    });
+  });
 
-	function tabChange(btn) {
-		activeBtn.classList.remove('active');
-		btn.classList.add('active');
-		activeBtn = btn;
-	}
+  function tabChange(btn) {
+    activeBtn.classList.remove('active');
+    btn.classList.add('active');
+    activeBtn = btn;
+  }
 
-	function roomChange(index) {
-		axios.get(`/andaz/ajax/room/room${index}.html`).then((res) => {
-			roomInfo.innerHTML = res.data;
-			roomPreview();
-			gsap.from(roomInfo, { opacity: 0.7 });
-		});
-	}
+  function roomChange(index) {
+    axios.get(`/andaz/ajax/room/room${index}.html`).then((res) => {
+      roomInfo.innerHTML = res.data;
+      roomPreview();
+      gsap.from(roomInfo, { opacity: 0.7 });
+    });
+  }
 }
 
 function diningEvent() {
-	const diningInfo = document.querySelectorAll('.dining-info-wrap');
-	let showInfo;
+  const diningInfo = document.querySelectorAll('.dining-info-wrap');
+  let showInfo;
 
-	diningInfo.forEach((info) => {
-		info.addEventListener('mouseenter', () => {
-			hoverInfo(info);
-		});
+  diningInfo.forEach((info) => {
+    info.addEventListener('mouseenter', () => {
+      hoverInfo(info);
+    });
 
-		info.addEventListener('mouseleave', () => {
-			info.style.opacity = 0;
-			showInfo = null;
-		});
-	});
+    info.addEventListener('mouseleave', () => {
+      info.style.opacity = 0;
+      showInfo = null;
+    });
+  });
 
-	function hoverInfo(info) {
-		if (!showInfo) {
-			info.style.opacity = 1;
-			showInfo = info;
-		}
-	}
+  function hoverInfo(info) {
+    if (!showInfo) {
+      info.style.opacity = 1;
+      showInfo = info;
+    }
+  }
 }
 
 function summerHouse() {
-	const houseInfo = document.querySelector('#house-info');
-	const summerList = document.querySelectorAll('#summer-img-list button');
-	let activeList = summerList[0];
-	let houseClass = 0;
+  const houseInfo = document.querySelector('#house-info');
+  const summerList = document.querySelectorAll('#summer-img-list button');
+  let activeList = summerList[0];
+  let houseClass = 0;
 
-	summerList.forEach((list, index) => {
-		list.addEventListener('click', () => {
-			listChange(list);
-			textChange(index);
-			classChange(index);
-		});
-	});
+  summerList.forEach((list, index) => {
+    list.addEventListener('click', () => {
+      listChange(list);
+      textChange(index);
+      classChange(index);
+    });
+  });
 
-	function listChange(list) {
-		if (list !== activeList) {
-			activeList.parentElement.classList.remove('active');
-			list.parentElement.classList.add('active');
-			activeList = list;
-		}
-	}
+  function listChange(list) {
+    if (list !== activeList) {
+      activeList.parentElement.classList.remove('active');
+      list.parentElement.classList.add('active');
+      activeList = list;
+    }
+  }
 
-	function textChange(index) {
-		axios.get(`/andaz/ajax/house/house${index}.html`).then((res) => {
-			houseInfo.innerHTML = res.data;
-		});
-	}
+  function textChange(index) {
+    axios.get(`/andaz/ajax/house/house${index}.html`).then((res) => {
+      houseInfo.innerHTML = res.data;
+    });
+  }
 
-	function classChange(index) {
-		if (index !== houseClass) {
-			houseInfo.classList.remove(`house-${houseClass}`);
-			houseClass = index;
-			houseInfo.classList.add(`house-${houseClass}`);
-		}
-	}
+  function classChange(index) {
+    if (index !== houseClass) {
+      houseInfo.classList.remove(`house-${houseClass}`);
+      houseClass = index;
+      houseInfo.classList.add(`house-${houseClass}`);
+    }
+  }
 }
 
 function contentsSlide() {
-	const contentsWrap = document.querySelectorAll('.contents-wrap');
-	let isMove = false;
-	let contentsIndex = 0;
+  const contentsWrap = document.querySelectorAll('.contents-wrap');
+  let isMove = false;
+  let contentsIndex = 0;
 
-	contentsWrap.forEach((item) => {
-		const contentsList = item.querySelector('.contents-list');
-		const nextBtn = item.querySelector('.next');
+  contentsWrap.forEach((item) => {
+    const contentsList = item.querySelector('.contents-list');
+    const nextBtn = item.querySelector('.next');
 
-		nextBtn.addEventListener('click', () => {
-			nextText(item);
-			nextImg(contentsList);
-		});
-	});
+    nextBtn.addEventListener('click', () => {
+      if (!isMove) {
+        nextText(item);
+        nextImg(contentsList);
+      }
+    });
+  });
 
-	function nextText(item) {
-		const itemLength = item.querySelectorAll('li').length;
-		const itemClass = item.classList[0];
-		const itemText = item.querySelector('.contents-text-wrap');
+  function nextText(item) {
+    const itemLength = item.querySelectorAll('li').length;
+    const itemClass = item.classList[0];
+    const itemText = item.querySelector('.contents-text-wrap');
 
-		contentsIndex++;
+    contentsIndex++;
 
-		if (contentsIndex === itemLength) {
-			contentsIndex = 0;
-		}
+    if (contentsIndex === itemLength) {
+      contentsIndex = 0;
+    }
 
-		axios
-			.get(`/andaz/ajax/${itemClass}/${itemClass}${contentsIndex}.html`)
-			.then((res) => {
-				itemText.innerHTML = res.data;
-			});
-	}
+    axios
+      .get(`/andaz/ajax/${itemClass}/${itemClass}${contentsIndex}.html`)
+      .then((res) => {
+        itemText.innerHTML = res.data;
+      });
+  }
 
-	function nextImg(target) {
-		if (!isMove) {
-			isMove = true;
+  function nextImg(target) {
+    isMove = true;
 
-			gsap.fromTo(
-				target,
-				{ xPercent: 0 },
-				{
-					xPercent: -81.2,
-					duration: 0.4,
-					ease: 'power1.out',
-					onStart: () => {
-						start(target);
-					},
-					onComplete: () => {
-						complete(target);
-					}
-				}
-			);
-		}
-	}
+    gsap.fromTo(
+      target,
+      { xPercent: 0 },
+      {
+        xPercent: -81.2,
+        duration: 0.4,
+        ease: 'power1.out',
+        onStart: () => {
+          start(target);
+        },
+        onComplete: () => {
+          complete(target);
+        }
+      }
+    );
+  }
 
-	function start(target) {
-		gsap.to(target.children[1], {
-			width: '80%',
-			filter: 'brightness(1)',
-			duration: 0.4,
-			ease: 'power1.out'
-		});
-	}
+  function start(target) {
+    gsap.to(target.children[1], {
+      width: '80%',
+      filter: 'brightness(1)',
+      duration: 0.4,
+      ease: 'power1.out'
+    });
+  }
 
-	function complete(target) {
-		if (isMove) {
-			isMove = false;
+  function complete(target) {
+    if (isMove) {
+      isMove = false;
 
-			target.append(target.firstElementChild);
-			gsap.set(target, { xPercent: 0 });
-			gsap.set(target.lastElementChild, {
-				width: '20%',
-				filter: 'brightness(0.5)'
-			});
-		}
-	}
+      target.append(target.firstElementChild);
+      gsap.set(target, { xPercent: 0 });
+      gsap.set(target.lastElementChild, {
+        width: '20%',
+        filter: 'brightness(0.5)'
+      });
+    }
+  }
 }
