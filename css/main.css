@@ -125,7 +125,6 @@
 	display: none;
 	bottom: 44px;
 	background-color: white;
-	overflow: hidden;
 }
 #choice-list li {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
@@ -567,29 +566,33 @@ li.line::after {
 #room-ex {
 	position: fixed;
 	top: 0;
+	z-index: 14;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.7);
-	cursor: pointer;
 }
-#room-ex img {
+#room-ex button {
 	width: 1400px;
 	height: 80%;
 	object-fit: cover;
 	position: relative;
 }
-#room-ex::after {
+#room-ex img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+#room-ex button::after {
 	content: '';
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: url(/andaz/images/close.svg) right 20px top 20px / 60px no-repeat;
-	width: 1400px;
-	height: 80%;
+	right: 12px;
+	top: 12px;
+	width: 60px;
+	height: 60px;
+	background: url(/andaz/images/close.svg) center / contain no-repeat;
 }
 
 #room-type-menu {
@@ -671,6 +674,9 @@ li.line::after {
 	font: 200 14px / 1.6em Pretendard;
 	opacity: 0;
 	transition: opacity 0.3s ease-out;
+}
+.dining-info-wrap:hover {
+	opacity: 1;
 }
 .dining-info-wrap h3 {
 	font: 500 20px / 1.6em Pretendard;
