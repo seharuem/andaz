@@ -4,7 +4,7 @@
 	bottom: 0;
 	z-index: 999;
 	justify-content: center;
-	width: 100%;
+	width: 100vw;
 	height: 80px;
 	background-color: white;
 	border-top: 1px solid rgba(0, 0, 0, 0.3);
@@ -592,9 +592,9 @@ li.line::after {
 	top: 12px;
 	width: 60px;
 	height: 60px;
-	background: url(/andaz/images/close.svg) center / contain no-repeat;
+	background-color: rgba(0, 0, 0, 0.7);
+	mask: url(/andaz/images/close.svg) center / contain no-repeat;
 }
-
 #room-type-menu {
 	justify-content: space-between;
 	font-size: 20px;
@@ -966,10 +966,7 @@ li.line::after {
 	.tooltip ~ p br {
 		display: none;
 	}
-	#room-ex img {
-		width: 90%;
-	}
-	#room-ex::after {
+	#room-ex button {
 		width: 90%;
 	}
 	#dining-list {
