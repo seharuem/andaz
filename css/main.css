@@ -281,7 +281,7 @@
 	gap: 100px;
 	color: white;
 }
-#contents > section {
+#contents > section, #contents > div {
 	width: 1416px;
 	gap: 28px;
 	padding: 0 20px;
@@ -392,7 +392,8 @@
 .offer-box {
 	p,
 	li,
-	button {
+	button,
+	span {
 		font-size: 14px;
 		font-weight: 300;
 	}
@@ -443,7 +444,7 @@ li.line::after {
 	height: 12px;
 	background: url(/andaz/images/tooltip.svg);
 }
-.tooltip ~ p {
+.tooltip ~ span {
 	position: absolute;
 	left: calc(100% + 4px);
 	z-index: 7;
@@ -458,11 +459,11 @@ li.line::after {
 	pointer-events: none;
 	word-break: keep-all;
 }
-.tooltip ~ p span {
+.tooltip ~ span span {
 	color: #ffe206;
 	margin-right: -4px;
 }
-.tooltip:hover ~ p {
+.tooltip:hover ~ span {
 	opacity: 1;
 }
 #toast {
@@ -484,14 +485,14 @@ li.line::after {
 /* 특별 주문 끝 */
 
 /* 룸 시작 */
-#contents #room {
+#contents #room-wrap {
 	width: 100%;
 	justify-content: center;
 	background-color: #fffef9;
 	color: black;
 	margin-top: -50px;
 }
-#room-wrap {
+#room {
 	width: 1416px;
 	padding: 50px 20px;
 	box-sizing: border-box;
@@ -945,8 +946,8 @@ li.line::after {
 		width: 92%;
 	}
 	#visual {
-		height: calc(100vh - 120px);
-		margin-top: 120px;
+		height: calc(100vh - 140px);
+		margin-top: 140px;
 	}
 	#contents #intro {
 		height: 400px;
@@ -1037,7 +1038,7 @@ li.line::after {
 		gap: 16px;
 	}
 }
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1080px) {
 	#visual {
 		height: calc(100vh - 80px);
 		margin-top: 80px;

@@ -60,14 +60,9 @@ function menuEvent() {
 			clearTimeout(moveTimer);
 		}
 
-		if (activeMenu) {
-			activeMenu.classList.remove('active');
-			activeSub.classList.remove('active');
-		}
-
-		if (selectSub) {
-			selectSub.classList.remove('select')
-		}
+		removeMenu();
+		removeSubMenu();
+		removeSub();
 
 		menu.classList.add('active');
 		subMenu.classList.add('active');
@@ -76,25 +71,41 @@ function menuEvent() {
 	}
 
 	function subMotion(sub) {
-		if (selectSub) {
-			selectSub.classList.remove('select');
-		}
+		removeSub();
 		sub.classList.add('select');
 		selectSub = sub;
 	}
 
 	function headerInit() {
-		activeMenu.classList.remove('active');
-		selectSub.classList.remove('select');
+		removeMenu();
+		removeSub();
 
 		moveTimer = setTimeout(() => {
-			activeSub.classList.remove('active');
+			removeSubMenu();
 		}, 400);
 
 		if (headerHeight === 80) {
 			header.style.clipPath = '';
 		} else {
 			header.style.clipPath = 'inset(0 0 40px 0)';
+		}
+	}
+
+	function removeMenu() {
+		if (activeMenu) {
+			activeMenu.classList.remove('active');
+		}
+	}
+
+	function removeSub() {
+		if (selectSub) {
+			selectSub.classList.remove('select');
+		}
+	}
+
+	function removeSubMenu() {
+		if (activeSub) {
+			activeSub.classList.remove('active');
 		}
 	}
 }
@@ -111,11 +122,11 @@ function headerEvent() {
 		}
 	});
 
-	document.querySelectorAll('a[href="#"]').forEach((anchor) => {
-		anchor.addEventListener('click', () => {
+	window.addEventListener('scroll', () => {
+		if (window.scrollY < window.innerHeight - 200) {
 			gsap.set(header, { yPercent: 0 });
 			gsap.set(shadow, { yPercent: 0 });
-		});
+		}
 	});
 
 	function headerMove(e) {
@@ -384,10 +395,34 @@ function specialCode() {
 
 	async function codeCopy(code, btn) {
 		try {
-			await navigator.clipboard.writeText(code);
+			// 모던 브라우저용 Clipboard API
+			if (navigator?.clipboard?.writeText) {
+				await navigator.clipboard.writeText(code);
+				btn.style.backgroundImage = checkUrl;
+				toast.innerText = '복사되었습니다!';
+				return;
+			}
+			// 폴백: execCommand 사용
+			fallbackCopy(code, btn);
+		} catch (err) {
+			toast.innerText = '복사 실패하였습니다.';
+		}
+	}
+
+	function fallbackCopy(code, btn) {
+		const textarea = document.createElement('textarea');
+		textarea.value = code;
+		textarea.style.position = 'fixed';
+		textarea.style.opacity = '0';
+		document.body.appendChild(textarea);
+		textarea.select();
+		const success = document.execCommand('copy');
+		document.body.removeChild(textarea);
+
+		if (success) {
 			btn.style.backgroundImage = checkUrl;
 			toast.innerText = '복사되었습니다!';
-		} catch (err) {
+		} else {
 			toast.innerText = '복사 실패하였습니다.';
 		}
 	}

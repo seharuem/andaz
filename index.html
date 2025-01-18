@@ -36,7 +36,7 @@
 		<!-- 바로가기 메뉴 시작 -->
 		<ul class="skipmenu-list">
 			<li><a href="#mainmenu-list" class="hidden">메인 메뉴 바로가기</a></li>
-			<li><a href="#room-search" class="hidden">조회 메뉴 바로가기</a></li>
+			<li><a href="#room-search" class="hidden">객실 조회 메뉴 바로가기</a></li>
 			<li><a href="#contents" class="hidden">콘텐츠 바로가기</a></li>
 			<li><a href="#special-offer" class="hidden">스페셜 오퍼 바로가기</a></li>
 			<li><a href="#room" class="hidden">룸 바로가기</a></li>
@@ -148,6 +148,7 @@
 
 		<!-- 조회 고정 영역 시작 -->
 		<section id="room-search" class="flex">
+			<h2 class="hidden">객실 조회 메뉴</h2>
 			<div id="room-search-wrap" class="flex">
 				<form class="flex">
 					<div class="room-search-form">
@@ -257,7 +258,7 @@
 		<!-- 조회 고정 영역 끝 -->
 
 		<!-- 비주얼 영역 시작 -->
-		<section id="visual">
+		<div id="visual">
 			<ul id="visual-list" class="flex">
 				<li id="visual-img0"></li>
 				<li id="visual-img1"></li>
@@ -271,13 +272,14 @@
 				<li><button type="button"></button></li>
 				<li><button type="button"></button></li>
 			</ul>
-		</section>
+		</div>
 		<!-- 비주얼 영역 끝 -->
 
 		<!-- 콘텐츠 시작 -->
-		<section id="contents" class="flex-column">
+		<div id="contents" class="flex-column">
 			<!-- 인트로 시작 -->
 			<section id="intro" class="flex">
+				<h2 class="hidden">안다즈 소개</h2>
 				<div id="intro-img"></div>
 				<div id="intro-text-wrap" class="flex-column">
 					<p id="intro-subtitle">
@@ -310,12 +312,12 @@
 							<div class="offer-title-wrap flex-column">
 								<h3 class="flex">
 									안다즈 윈터 저니 패키지 (베이직 & 얼리버드)
-									<div class="tooltip"></div>
-									<p>
+									<span class="tooltip"></span>
+									<span>
 										얼리버드 패키지는
 										<br />
 										투숙일로부터 7일 전 예약 시 10% 할인 혜택을 제공합니다.
-									</p>
+									</span>
 								</h3>
 								<p>
 									안다즈 윈터 저니 패키지로 환상적인 겨울 여행을 떠나보세요.
@@ -337,14 +339,14 @@
 							<div class="offer-info-code flex-column">
 								<h4 class="flex">
 									특별 행사 코드
-									<div class="tooltip"></div>
-									<p>
+									<span class="tooltip"></span>
+									<span>
 										코드를 복사한 후 아래 객실 조회 메뉴의 '특별 요금 선택'을
 										클릭하여
 										<br />
 										<span>특별 행사 코드</span>
 										를 선택한 후 복사한 코드를 붙여넣기하여 조회합니다.
-									</p>
+									</span>
 								</h4>
 								<ul class="special-code flex">
 									<li class="flex line">
@@ -383,14 +385,14 @@
 							<div class="offer-info-code flex-column">
 								<h4 class="flex">
 									기업 또는 단체 코드
-									<div class="tooltip"></div>
-									<p>
+									<span class="tooltip"></span>
+									<span>
 										코드를 복사한 후 아래 객실 조회 메뉴의 '특별 요금 선택'을
 										클릭하여
 										<br />
 										<span>기업 또는 단체 코드</span>
 										를 선택한 후 복사한 코드를 붙여넣기하여 조회합니다.
-									</p>
+									</span>
 								</h4>
 								<button type="button">3905</button>
 							</div>
@@ -409,8 +411,8 @@
 			<!-- 특별 주문 끝 -->
 
 			<!-- 룸 섹션 시작 -->
-			<section id="room" class="flex">
-				<div id="room-wrap" class="flex-column">
+			<div id="room-wrap" class="flex">
+				<section id="room" class="flex-column">
 					<h2>Room</h2>
 
 					<div id="room-visual-wrap" class="flex">
@@ -471,8 +473,8 @@
 						<li><button type="button">Garden Suite</button></li>
 						<li><button type="button">Penthouse</button></li>
 					</ul>
-				</div>
-			</section>
+				</section>
+			</div>
 			<!-- 룸 섹션 끝 -->
 
 			<!-- 다이닝 섹션 시작 -->
@@ -776,7 +778,7 @@
 				</a>
 			</section>
 			<!-- 배너 끝 -->
-		</section>
+		</div>
 		<!-- 콘텐츠 끝 -->
 
 		<!-- 푸터 시작 -->
