@@ -19,18 +19,26 @@ function menuEvent() {
 	let headerHeight = header.offsetHeight;
 	let activeMenu;
 	let activeSub;
+	let selectSub;
 	let moveTimer;
 
 	mainMenu.forEach((menu, index, array) => {
-		const subMenu = menu.querySelector('.submenu');
-		const lastMenu = subMenu.lastElementChild.children[0];
+		const subList = menu.querySelector('.submenu');
+		const subMenu = menu.querySelectorAll('.submenu li');
+		const lastMenu = subList.lastElementChild.children[0];
 
 		menu.addEventListener('mouseenter', () => {
-			showMenu(menu, subMenu);
+			showMenu(menu, subList);
+		});
+
+		subMenu.forEach((sub) => {
+			sub.addEventListener('mouseenter', () => {
+				subMotion(sub);
+			});
 		});
 
 		menu.children[0].addEventListener('focus', () => {
-			showMenu(menu, subMenu);
+			showMenu(menu, subList);
 		});
 
 		if (index === array.length - 1) {
@@ -57,14 +65,27 @@ function menuEvent() {
 			activeSub.classList.remove('active');
 		}
 
+		if (selectSub) {
+			selectSub.classList.remove('select')
+		}
+
 		menu.classList.add('active');
 		subMenu.classList.add('active');
 		activeMenu = menu;
 		activeSub = subMenu;
 	}
 
+	function subMotion(sub) {
+		if (selectSub) {
+			selectSub.classList.remove('select');
+		}
+		sub.classList.add('select');
+		selectSub = sub;
+	}
+
 	function headerInit() {
 		activeMenu.classList.remove('active');
+		selectSub.classList.remove('select');
 
 		moveTimer = setTimeout(() => {
 			activeSub.classList.remove('active');
