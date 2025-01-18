@@ -135,6 +135,12 @@
 #choice-list button {
 	width: 100%;
 }
+#choice-list li:first-child button {
+	border-radius: 20px 20px 0 0;
+}
+#choice-list li:last-child button {
+	border-radius: 0 0 20px 20px;
+}
 #discount-code {
 	height: 100%;
 	font: inherit;
