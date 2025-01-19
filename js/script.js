@@ -614,33 +614,33 @@ function summerHouse() {
 function contentsSlide() {
 	const contentsWrap = document.querySelectorAll('.contents-wrap');
 	let isMove = false;
-	let contentsIndex = 0;
 
 	contentsWrap.forEach((item) => {
 		const contentsList = item.querySelector('.contents-list');
+		const itemLength = item.querySelectorAll('li').length;
 		const nextBtn = item.querySelector('.next');
+		let contentsIndex = 0;
 
 		nextBtn.addEventListener('click', () => {
 			if (!isMove) {
-				nextText(item);
+				contentsIndex++;
+
+				if (contentsIndex === itemLength) {
+					contentsIndex = 0;
+				}
+
+				nextText(item, contentsIndex);
 				nextImg(contentsList);
 			}
 		});
 	});
 
-	function nextText(item) {
-		const itemLength = item.querySelectorAll('li').length;
+	function nextText(item, index) {
 		const itemClass = item.classList[0];
 		const itemText = item.querySelector('.contents-text-wrap');
 
-		contentsIndex++;
-
-		if (contentsIndex === itemLength) {
-			contentsIndex = 0;
-		}
-
 		axios
-			.get(`/andaz/ajax/${itemClass}/${itemClass}${contentsIndex}.html`)
+			.get(`/andaz/ajax/${itemClass}/${itemClass}${index}.html`)
 			.then((res) => {
 				itemText.innerHTML = res.data;
 			});
